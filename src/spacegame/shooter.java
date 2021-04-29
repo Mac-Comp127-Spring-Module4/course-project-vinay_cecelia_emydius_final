@@ -56,9 +56,6 @@ public shooter(
     }
     
 
-    /**
-    * Updates the position of the ball after checking if there is a collision
-    */
     public boolean updatePosition(double dt) {
         double newx = centerX;
         double newY = centerY;
@@ -81,8 +78,14 @@ public shooter(
     public void RemoveToCanvas(CanvasWindow canvas) {
         canvas.remove(ballShape);
     }
-}
-    
 
-  
-   
+
+// maybe a reset method after is checks for a collision? resets it to the spot where the shooter is. 
+// I feel like it wouldn't be very fluid though
+    
+// public void resetAndReshoot(){
+
+// }
+} 
+   // so how do we create it so it continues to measure the angle and shoot instead of random angles?
+   // multiple balls at random places?
