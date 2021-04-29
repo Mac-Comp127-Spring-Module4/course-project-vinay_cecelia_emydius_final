@@ -1,5 +1,6 @@
 package spacegame;
 
+<<<<<<< Updated upstream
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.GraphicsObject;
 
@@ -18,4 +19,8 @@ public void collision(shooter shooter){
 // method for collision of bullets with the enemy 
 
 // method for collision of bulllets with shooter (guy at bottom of the screen)
+=======
+public class CollisionTester {
+    
+>>>>>>> Stashed changes
 }
