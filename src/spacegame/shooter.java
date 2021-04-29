@@ -5,7 +5,7 @@ import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.Ellipse;
 import edu.macalester.graphics.GraphicsObject;
 
-public class shooter{
+public class Shooter{
 
     public static final double BALL_RADIUS = 6;
 
@@ -23,7 +23,7 @@ public class shooter{
 
 
     //the constructor
-public shooter(
+public Shooter(
         double centerX,
         double centerY,
         double initialSpeed,
