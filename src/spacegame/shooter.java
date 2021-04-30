@@ -5,7 +5,7 @@ import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.Ellipse;
 import edu.macalester.graphics.GraphicsObject;
 
-public class Shooter {
+public class Shooter{
 
     public static final double BALL_RADIUS = 6;
 
@@ -23,7 +23,7 @@ public class Shooter {
 
 
     //the constructor
-public Shooter (
+public Shooter(
         double centerX,
         double centerY,
         double initialSpeed,
@@ -87,5 +87,3 @@ public Shooter (
 
 // }
 } 
-   // so how do we create it so it continues to measure the angle and shoot instead of random angles?
-   // multiple balls at random places?
