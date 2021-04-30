@@ -2,12 +2,12 @@ package spacegame;
 
 import edu.macalester.graphics.Image;
 
-public class Alien extends Sprite {
-    
-    public Alien(double x, double y) {
+public class Player extends Sprite {
+
+    public Player(double x, double y) {
         super(x, y);
-        setImage(new Image(x, y, "sprites/armedalien.png"));
-        setDirectionFaced("down");
+        setImage(new Image(x, y, "sprites/player.png"));
+        setDirectionFaced("up");
     }
 
     /**
@@ -17,5 +17,5 @@ public class Alien extends Sprite {
     public void updatePosition() {
         return;
     }
-
+    
 }
