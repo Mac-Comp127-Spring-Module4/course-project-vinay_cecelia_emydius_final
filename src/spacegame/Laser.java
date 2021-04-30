@@ -18,10 +18,8 @@ public class Laser extends Line{
     public Laser(
         double startingPointx, 
         double startingPointY, 
-        double endingPointX, 
-        double endingPointY,
         double dYVelocity){
-        super(startingPointx, startingPointY, endingPointX, endingPointY);
+        super(startingPointx, startingPointY, startingPointx, startingPointY + 10);
         this.dYVelocity= dYVelocity;
         this.setStrokeColor(LINE_COLOR);
     }
@@ -33,7 +31,7 @@ public class Laser extends Line{
      */
     public void moveLaser(CanvasWindow canvas){
         if(this.getY() >= canvas.getHeight() - this.getHeight()|| this.getY() < 0){
-            canvas.remove(this);
+            // canvas.remove(this);
         }
         this.setPosition(this.getX(), this.getY()+dYVelocity);
        // this.moveBy(this.getX(), this.getY()+dYVelocity);

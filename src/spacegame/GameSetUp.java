@@ -13,9 +13,10 @@ public class GameSetUp {
         canvas = new CanvasWindow("Space Shooter!", CANVAS_WIDTH, CANVAS_HEIGHT);
     //     ballObject1 = new ShooterFriend(300, 400, 7, 600, 800, canvas);
     //    ballObject1.addToCanvas(canvas);
-       Laser testLaser = new Laser(300, 300, 300, 350, 3);
-       canvas.add(testLaser);
-        canvas.animate(()->testLaser.moveLaser(canvas));
+    //    Laser testLaser = new Laser(300, 300, 300, 350, 3);
+    //    canvas.add(testLaser);
+    //     canvas.animate(()->testLaser.moveLaser(canvas));
+        Alien alien = new Alien(300, 400);
     
     }
 

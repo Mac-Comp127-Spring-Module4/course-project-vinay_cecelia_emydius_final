@@ -1,11 +1,15 @@
 package spacegame;
 
+import java.util.List;
+
 import edu.macalester.graphics.Image;
+
 public class Sprite{
 
     private boolean visible,dead;
     private Image image;
-    int x,y,dX;
+    private double x,y,dX;
+    private List<Laser> laserHolder;
 
     public Sprite(){
         visible=true;
@@ -23,19 +27,19 @@ public class Sprite{
         this.visible = visible;
     }
 
-    public void setX(int x) {
+    public void setX(double x) {
         this.x = x;
     }
 
-    public int getX() {
+    public double getX() {
         return x;
     }
 
-    public void setY(int y) {
+    public void setY(double y) {
         this.y = y;
     }
 
-    public int getY() {
+    public double getY() {
         return y;
     }
 
@@ -53,5 +57,9 @@ public class Sprite{
     
     public Image getImage() {
         return image;
+    }
+
+    public void shootLaser() {
+        laserHolder.add(new Laser(x, y, 10));
     }
 }
