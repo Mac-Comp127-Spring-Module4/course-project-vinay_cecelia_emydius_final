@@ -6,14 +6,17 @@ public class GameSetUp {
     private static final int CANVAS_HEIGHT = 800;
 
     private CanvasWindow canvas;
-    private Shooter ballObject1;
+    private ShooterFriend ballObject1;
 
 
     public GameSetUp(){
         canvas = new CanvasWindow("Space Shooter!", CANVAS_WIDTH, CANVAS_HEIGHT);
-        ballObject1 = new Shooter(300, 570, 7, 600, 800, canvas);
-        ballObject1.addToCanvas(canvas);
-
+    //     ballObject1 = new ShooterFriend(300, 400, 7, 600, 800, canvas);
+    //    ballObject1.addToCanvas(canvas);
+       Laser testLaser = new Laser(300, 300, 300, 350, 3);
+       canvas.add(testLaser);
+        canvas.animate(()->testLaser.moveLaser(canvas));
+    
     }
 
 
