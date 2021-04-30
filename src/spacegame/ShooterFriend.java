@@ -1,12 +1,12 @@
 package spacegame;
+
 import java.awt.Color;
 
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.Ellipse;
 import edu.macalester.graphics.GraphicsObject;
 
-public class Shooter{
-
+public class ShooterFriend {
     public static final double BALL_RADIUS = 6;
 
     private double centerX;
@@ -23,7 +23,7 @@ public class Shooter{
 
 
     //the constructor
-public Shooter(
+public ShooterFriend(
         double centerX,
         double centerY,
         double initialSpeed,
@@ -87,3 +87,5 @@ public Shooter(
 
 // }
 } 
+    
+
