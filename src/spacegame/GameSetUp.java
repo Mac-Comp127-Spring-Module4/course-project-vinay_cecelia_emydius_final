@@ -5,11 +5,12 @@ import edu.macalester.graphics.*;
 import edu.macalester.graphics.events.KeyboardEvent;
 
 public class GameSetUp {
-    private static final int CANVAS_WIDTH = 600;
+    private static final int CANVAS_WIDTH = 1280;
     private static final int CANVAS_HEIGHT = 800;
 
     private CanvasWindow canvas;
     private ShooterFriend ballObject1;
+    private Player player;
     private Laser testLaser;
     private Alien alien;
 
@@ -25,7 +26,10 @@ public class GameSetUp {
         // canvas.add(testLaser);
         //canvas.onMouseMove(event -> shooterFriend.shooterPosition(event.getPosition()));
         // canvas.animate(()->testLaser.moveLaser(canvas));
-        // Alien alien = new Alien(300, 400);
+        Alien alien = new Alien(640, 400);
+        alien.addToCanvas(canvas);
+        Player player = new Player(640, 450);
+        player.addToCanvas(canvas);
 
     }
 

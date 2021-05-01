@@ -6,7 +6,7 @@ public class Player extends Sprite {
 
     public Player(double x, double y) {
         super(x, y);
-        setImage(new Image(x, y, "sprites/player.png"));
+        setImage(new Image(x, y, "sprites/spaceship.png"));
         setDirectionFaced("up");
     }
 
