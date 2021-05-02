@@ -23,13 +23,6 @@ public class Player extends Sprite {
     }
 
 
-    /**
-    * Adds paddles to campus
-    */
-    // public void addToCanvas(CanvasWindow canvas) {
-    //     this.addToCanvas(canvas);
-    // }
-
 
     /**
      * Runs canvas's onKeyDown method only after added to canvas.

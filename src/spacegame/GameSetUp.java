@@ -8,6 +8,7 @@ import edu.macalester.graphics.events.KeyboardEventHandler;
 public class GameSetUp {
     private static final int CANVAS_WIDTH = 1100;
     private static final int CANVAS_HEIGHT = 700;
+    private static final int CONSTANT_Y = 600;
 
     private CanvasWindow canvas;
     private Player player;
@@ -28,7 +29,15 @@ public class GameSetUp {
         Alien alien = new Alien(20, 20);
         alien.addToCanvas(canvas);
 
+        canvas.onMouseMove(event -> player.updatePosition());
+
     }
+
+    // I shouldn't have to make a new setPosition method because that should be a built in method
+    // public void updatePosition(Point point){
+    //         player.updatePosition(point.getX(), CONSTANT_Y);
+    //         }
+    
 
    
 
