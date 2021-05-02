@@ -3,6 +3,7 @@ import java.awt.Color;
 
 import edu.macalester.graphics.*;
 import edu.macalester.graphics.events.KeyboardEvent;
+import edu.macalester.graphics.events.KeyboardEventHandler;
 
 public class GameSetUp {
     private static final int CANVAS_WIDTH = 1280;
@@ -13,6 +14,7 @@ public class GameSetUp {
     private Player player;
     private Laser testLaser;
     private Alien alien;
+   
     
 
 
@@ -26,8 +28,7 @@ public class GameSetUp {
         //Laser testLaser = new Laser(300, 300, 300, 350, 3);
         // canvas.add(testLaser);
         //canvas.onMouseMove(event -> ballObject1.updatePosition(event.getPosition()));
-        //canvas.onKeyUp(event -> player.updatePosition());
-        canvas.animate(()->testLaser.moveLaser(canvas));
+        //canvas.animate(()->testLaser.moveLaser(canvas));
         Alien alien = new Alien(640, 400);
         alien.addToCanvas(canvas);
         Player player = new Player(640, 450);
@@ -35,11 +36,7 @@ public class GameSetUp {
 
     }
 
-    // public void action(KeyboardEvent e){
-    //     if (e.getKeyCode()==KeyEvent.VK_SPACE){
-
-    //     }
-
+   
 
     
     public static void main(String[] args){
