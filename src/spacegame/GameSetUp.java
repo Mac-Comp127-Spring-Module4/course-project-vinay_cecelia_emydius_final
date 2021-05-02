@@ -6,8 +6,8 @@ import edu.macalester.graphics.events.KeyboardEvent;
 import edu.macalester.graphics.events.KeyboardEventHandler;
 
 public class GameSetUp {
-    private static final int CANVAS_WIDTH = 1280;
-    private static final int CANVAS_HEIGHT = 800;
+    private static final int CANVAS_WIDTH = 1100;
+    private static final int CANVAS_HEIGHT = 700;
 
     private CanvasWindow canvas;
     private Player player;
@@ -21,7 +21,7 @@ public class GameSetUp {
         canvas = new CanvasWindow("Space Shooter!", CANVAS_WIDTH, CANVAS_HEIGHT);
         canvas.setBackground(Color.BLACK);
 
-        Player player = new Player(640-30, 700);
+        Player player = new Player(550-30, 600);
         player.addToCanvas(canvas);
 
 

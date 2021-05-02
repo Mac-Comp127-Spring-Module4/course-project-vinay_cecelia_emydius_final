@@ -17,8 +17,8 @@ public class Player extends Sprite {
      */
     @Override
     public void updatePosition() {
-        this.getX();
-        this.setY(700);
+
+
         return;
     }
 
