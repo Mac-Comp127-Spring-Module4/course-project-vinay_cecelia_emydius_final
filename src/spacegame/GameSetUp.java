@@ -10,7 +10,6 @@ public class GameSetUp {
     private static final int CANVAS_HEIGHT = 800;
 
     private CanvasWindow canvas;
-    private ShooterFriend ballObject1;
     private Player player;
     private Laser testLaser;
     private Alien alien;
@@ -24,6 +23,7 @@ public class GameSetUp {
 
         Player player = new Player(640-30, 700);
         player.addToCanvas(canvas);
+
 
         Alien alien = new Alien(20, 20);
         alien.addToCanvas(canvas);

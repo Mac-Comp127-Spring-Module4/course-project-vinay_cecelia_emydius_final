@@ -17,8 +17,19 @@ public class Player extends Sprite {
      */
     @Override
     public void updatePosition() {
+        this.getX();
+        this.setY(700);
         return;
     }
+
+
+    /**
+    * Adds paddles to campus
+    */
+    // public void addToCanvas(CanvasWindow canvas) {
+    //     this.addToCanvas(canvas);
+    // }
+
 
     /**
      * Runs canvas's onKeyDown method only after added to canvas.
