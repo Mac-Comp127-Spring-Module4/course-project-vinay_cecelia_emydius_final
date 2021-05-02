@@ -18,4 +18,12 @@ public class Alien extends Sprite {
         return;
     }
 
+    /**
+     * Not implemented yet
+     */
+    @Override
+    public void animationHandler() {
+
+    }
+
 }

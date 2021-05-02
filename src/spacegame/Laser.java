@@ -19,21 +19,21 @@ public class Laser extends Line{
         double startingPointx, 
         double startingPointY, 
         double dYVelocity){
-        super(startingPointx, startingPointY, startingPointx, startingPointY + 10);
+        super(startingPointx, startingPointY, startingPointx, startingPointY - 10);
         this.dYVelocity= dYVelocity;
         this.setStrokeColor(LINE_COLOR);
+        this.setStrokeWidth(5);
     }
 
-    /**
-     * Method to move the line while checking for the canvas window's walls to make sure that the line does
-     * not go out of bounds.
-     * @param canvas
-     */
-    public void moveLaser(CanvasWindow canvas){
-        if(this.getY() >= canvas.getHeight() - this.getHeight()|| this.getY() < 0){
-            // canvas.remove(this);
-        }
-        this.setPosition(this.getX(), this.getY()+dYVelocity);
-       // this.moveBy(this.getX(), this.getY()+dYVelocity);
+    public void updatePosition() {
+        getCanvas().animate(() -> {
+            if (getCanvas() != null) {
+                this.moveBy(0, dYVelocity);
+                if (getY() <= 0 || getY() >= getCanvas().getHeight()) {
+                    getCanvas().remove(this);
+                    System.out.println("Removed!");
+                }
+            }
+        });
     }
 }
