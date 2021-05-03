@@ -3,6 +3,9 @@ package spacegame;
 import edu.macalester.graphics.*;
 import java.awt.*;
 
+/**
+ * 
+ */
 public class Laser extends Line{
     private double dYVelocity;
     private static final Color LINE_COLOR= new Color(200,150,100);
@@ -25,6 +28,9 @@ public class Laser extends Line{
         this.setStrokeWidth(5);
     }
 
+    /**
+     * 
+     */
     public void updatePosition() {
         getCanvas().animate(() -> {
             if (getCanvas() != null) {

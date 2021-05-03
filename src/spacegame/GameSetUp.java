@@ -17,6 +17,9 @@ public class GameSetUp {
     private Alien alien;
     private Player player;
    
+    /**
+     * 
+     */
     public GameSetUp(){
         canvas = new CanvasWindow("Space Shooter!", CANVAS_WIDTH, CANVAS_HEIGHT);
         canvas.setBackground(Color.BLACK);
@@ -31,6 +34,9 @@ public class GameSetUp {
 
     }
 
+    /**
+     * 
+     */
     public void gameWinGameLoss(){
         if(player.getLives() == 0){
             endGame();
@@ -42,6 +48,9 @@ public class GameSetUp {
             
     }
 
+    /**
+     * 
+     */
     public void endGame(){
         GraphicsText loss = new GraphicsText("Game Over", CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2);
         loss.setFontSize(20);
@@ -64,6 +73,9 @@ public class GameSetUp {
         
     }
 
+    /**
+     * 
+     */
     public void resetGame(){
         new GameSetUp();
     }

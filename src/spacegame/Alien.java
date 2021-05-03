@@ -10,6 +10,9 @@ import edu.macalester.graphics.GraphicsGroup;
 import edu.macalester.graphics.GraphicsObject;
 import edu.macalester.graphics.Image;
 
+/**
+ * 
+ */
 public class Alien extends Sprite {
     
     private Instant start;
@@ -18,7 +21,11 @@ public class Alien extends Sprite {
     private List<Alien> aliens= new ArrayList<>();
     private int numAliens;
     
-   
+   /**
+    * 
+    * @param x
+    * @param y
+    */
     public Alien(double x, double y) {
         super(x, y);
         setImage(new Image(x, y, "sprites/armedalien.png"));
@@ -27,7 +34,10 @@ public class Alien extends Sprite {
 
     }
 
-    
+    /**
+     * 
+     * @param canvas
+     */
     public void createAlienArmy(CanvasWindow canvas){
         alienGroup= new GraphicsGroup();
         double margin = canvas.getWidth() * 0.05;
@@ -53,6 +63,10 @@ public class Alien extends Sprite {
         canvas.add(alienGroup);
     }
 
+    /**
+     * 
+     * @return
+     */
     public int getNumAliens() {
         return numAliens;
     }
@@ -75,6 +89,10 @@ public class Alien extends Sprite {
             }
         });
     }
+    /**
+     * @param laser
+     * @param canvas
+     */
     private void collisionChecker(Laser laser, CanvasWindow canvas){
         GraphicsObject possibleobj = canvas.getElementAt(alienGroup.getPosition());
             if(alienGroup.getPosition()!=null){
@@ -85,6 +103,11 @@ public class Alien extends Sprite {
         } 
     }
 
+    /**
+     * 
+     * @param laser
+     * @param canvas
+     */
     public void removeAlien(Laser laser, CanvasWindow canvas){
         for (int i = 0; i < aliens.size(); i++) {
             collisionChecker(laser, canvas);

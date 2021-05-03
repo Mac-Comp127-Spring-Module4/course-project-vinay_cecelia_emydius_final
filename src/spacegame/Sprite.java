@@ -8,6 +8,9 @@ import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.Image;
 import edu.macalester.graphics.Line;
 
+/**
+ * 
+ */
 public abstract class Sprite{
 
     private boolean visible,dead;
@@ -17,6 +20,11 @@ public abstract class Sprite{
     private CanvasWindow canvas;
     private int directionFaced;
 
+    /**
+     * 
+     * @param x
+     * @param y
+     */
     public Sprite(double x, double y){
         this.x = x;
         this.y = y;
@@ -71,6 +79,10 @@ public abstract class Sprite{
         return image;
     }
 
+    /**
+     * 
+     * @param dir
+     */
     public void setDirectionFaced(String dir) {
         if (dir.equals("up"))
             directionFaced = -1;
@@ -79,12 +91,20 @@ public abstract class Sprite{
         else throw new UnsupportedOperationException("SetDirectionFaced only takes \"up\" and \"down\"");
     }
 
+    /**
+     * 
+     * @param canvas
+     */
     public void addToCanvas(CanvasWindow canvas){
         this.canvas = canvas;
         canvas.add(image);
         animationHandler();
     }
 
+
+    /**
+     * 
+     */
     public void shootLaser() {
         System.out.println("This runs");
         System.out.println("x: " + x + ", y: " + y);
