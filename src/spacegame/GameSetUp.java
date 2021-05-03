@@ -34,10 +34,44 @@ public class GameSetUp {
 
     }
 
-    // I shouldn't have to make a new setPosition method because that should be a built in method
-    // public void updatePosition(Point point){
-    //         player.updatePosition(point.getX(), CONSTANT_Y);
-    //         }
+
+    // public void inBoundsOutBounds(){
+    //     if(ballObject.outOfBounds()){
+    //         removeBall();
+    //         lives -= + 1;
+    //     if(lives == 0){
+    //         endGame();
+    //     }
+    //     if(brickWall.numBricks() == 0){
+    //         gameWinner();
+    //     }
+    //         ballObject.resetAfterBounds();
+            
+    //     }
+    // }
+
+    // public void endGame(){
+    //     GraphicsText loss = new GraphicsText("Game Over", CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2);
+    //     loss.setFontSize(20);
+    //     loss.setFillColor(Color.GREEN);
+    //     canvas.add(loss);
+    //     canvas.draw();
+    //     canvas.pause(2000);
+    //     canvas.closeWindow();
+    // }
+
+    // /**
+    // * Print method for game winner
+    // */
+    // public void gameWinner(){
+    //     GraphicsText win = new GraphicsText("You Win!!!!", CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2);
+    //     win.setFontSize(20);
+    //     win.setFillColor(Color.YELLOW);
+    //     canvas.add(win);
+    //     canvas.draw();
+    //     canvas.pause(2000);
+    //     canvas.closeWindow();
+    // }
     
 
    

@@ -73,4 +73,24 @@ public class Alien extends Sprite {
         });
     }
 
+    // public void collisionChecker(double newx, double newY, BrickWall bWall){
+    //     GraphicsObject possibleobj = canvas.getElementAt(newx + 2 * BALL_RADIUS, newY);
+    //         if(canvas.getElementAt(newx + 2 * BALL_RADIUS, newY) != null){
+    //         velocityY *= -1;
+    //         if(possibleobj instanceof Brick){
+    //             canvas.remove(possibleobj);
+    //             bWall.decrement();
+    //         }
+    //         }
+    //         else if (canvas.getElementAt(newx, newY + 2 * BALL_RADIUS) != null){
+    //         velocityX *= -1;
+    //         }  
+    //         if((newx <= 0 || newx >= maxX)){
+    //             velocityX = -velocityX;
+    //             }
+    //         if((newY < 0)){
+    //             velocityY = -velocityY;
+    //         }
+    // }
+
 }
