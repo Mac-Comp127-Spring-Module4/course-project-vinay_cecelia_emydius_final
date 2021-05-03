@@ -12,9 +12,16 @@ public class GameSetUp {
     private Laser laser;
 
     private CanvasWindow canvas;
+     private Alien alien;
+    private int lives;
+   
+    
+
+
     public GameSetUp(){
         canvas = new CanvasWindow("Space Shooter!", CANVAS_WIDTH, CANVAS_HEIGHT);
         canvas.setBackground(Color.BLACK);
+        lives = 3; 
 
         Player player = new Player(550-30, 600);
         player.addToCanvas(canvas);
@@ -22,50 +29,46 @@ public class GameSetUp {
 
         Alien alien = new Alien(300, 100);
         alien.createAlienArmy(canvas);
-       // alien.removeAlien(laser, canvas);
+        alien.removeAlien(laser, canvas);
 
         canvas.onMouseMove(event -> player.updatePosition(event.getPosition().getX(), canvas));
 
     }
 
 
-    // public void inBoundsOutBounds(){
-    //     if(ballObject.outOfBounds()){
-    //         removeBall();
-    //         lives -= + 1;
-    //     if(lives == 0){
-    //         endGame();
-    //     }
-    //     if(brickWall.numBricks() == 0){
-    //         gameWinner();
-    //     }
-    //         ballObject.resetAfterBounds();
+    public void gameWinGameLoss(){
+        if(lives == 0){
+            endGame();
+        }
+        if(alien.getNumAliens() == 0){
+            gameWinner();
+        }
+        // reset method here or in player class, for after the alien hits the player
             
-    //     }
-    // }
+    }
 
-    // public void endGame(){
-    //     GraphicsText loss = new GraphicsText("Game Over", CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2);
-    //     loss.setFontSize(20);
-    //     loss.setFillColor(Color.GREEN);
-    //     canvas.add(loss);
-    //     canvas.draw();
-    //     canvas.pause(2000);
-    //     canvas.closeWindow();
-    // }
+    public void endGame(){
+        GraphicsText loss = new GraphicsText("Game Over", CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2);
+        loss.setFontSize(20);
+        loss.setFillColor(Color.GREEN);
+        canvas.add(loss);
+        canvas.draw();
+        canvas.pause(2000);
+        canvas.closeWindow();
+    }
 
-    // /**
-    // * Print method for game winner
-    // */
-    // public void gameWinner(){
-    //     GraphicsText win = new GraphicsText("You Win!!!!", CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2);
-    //     win.setFontSize(20);
-    //     win.setFillColor(Color.YELLOW);
-    //     canvas.add(win);
-    //     canvas.draw();
-    //     canvas.pause(2000);
-    //     canvas.closeWindow();
-    // }
+    /**
+    * Print method for game winner
+    */
+    public void gameWinner(){
+        GraphicsText win = new GraphicsText("You Win!!!!", CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2);
+        win.setFontSize(20);
+        win.setFillColor(Color.YELLOW);
+        canvas.add(win);
+        canvas.draw();
+        canvas.pause(2000);
+        canvas.closeWindow();
+    }
     
 
    
