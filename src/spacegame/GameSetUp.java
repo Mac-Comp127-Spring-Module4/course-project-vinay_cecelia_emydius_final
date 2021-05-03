@@ -1,23 +1,22 @@
 package spacegame;
 import java.awt.Color;
+import java.util.Scanner;
 
 import edu.macalester.graphics.*;
 import edu.macalester.graphics.events.KeyboardEvent;
 import edu.macalester.graphics.events.KeyboardEventHandler;
 
 public class GameSetUp {
+    Scanner sc= new Scanner(System.in);
     private static final int CANVAS_WIDTH = 1100;
     private static final int CANVAS_HEIGHT = 700;
     private static final int CONSTANT_Y = 600;
     private Laser laser;
 
     private CanvasWindow canvas;
-     private Alien alien;
+    private Alien alien;
     private int lives;
    
-    
-
-
     public GameSetUp(){
         canvas = new CanvasWindow("Space Shooter!", CANVAS_WIDTH, CANVAS_HEIGHT);
         canvas.setBackground(Color.BLACK);
@@ -34,7 +33,6 @@ public class GameSetUp {
         canvas.onMouseMove(event -> player.updatePosition(event.getPosition().getX(), canvas));
 
     }
-
 
     public void gameWinGameLoss(){
         if(lives == 0){
@@ -54,7 +52,23 @@ public class GameSetUp {
         canvas.add(loss);
         canvas.draw();
         canvas.pause(2000);
-        canvas.closeWindow();
+        GraphicsText restart= new GraphicsText("Restart? (Y/N)", CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2);
+        restart.setFontSize(20);
+        restart.setFillColor(Color.red);
+        canvas.add(restart);
+        canvas.draw();
+        String reset = sc.next();
+        if(reset=="Y"){
+            resetGame();
+        }
+        else{
+            canvas.closeWindow();
+        }
+        
+    }
+
+    public void resetGame(){
+        new GameSetUp();
     }
 
     /**

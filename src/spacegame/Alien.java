@@ -16,6 +16,8 @@ public class Alien extends Sprite {
     private Instant end;
     private GraphicsGroup alienGroup;
     private List<Alien> aliens= new ArrayList<>();
+    private int numAliens;
+    private Alien alien;
    
     public Alien(double x, double y) {
         super(x, y);
@@ -45,13 +47,15 @@ public class Alien extends Sprite {
             }
             alienGroup.add(alien.getImage());
             aliens.add(alien);
+            numAliens++;
         }
         canvas.add(alienGroup);
     }
 
-    public GraphicsGroup getAlienGroup() {
-        return alienGroup;
+    public int getNumAliens() {
+        return numAliens;
     }
+
 
     /**
      * Makes the alien shoot a laser every 3 seconds.
@@ -81,9 +85,9 @@ public class Alien extends Sprite {
     }
 
     public void removeAlien(Laser laser, CanvasWindow canvas){
-        for (Alien alien : aliens) {
+        for (int i = 0; i < aliens.size(); i++) {
             collisionChecker(laser, canvas);
-        }
+        } 
     }
 
 }
