@@ -7,6 +7,7 @@ import java.util.List;
 
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.GraphicsGroup;
+import edu.macalester.graphics.GraphicsObject;
 import edu.macalester.graphics.Image;
 
 public class Alien extends Sprite {
@@ -20,6 +21,7 @@ public class Alien extends Sprite {
         super(x, y);
         setImage(new Image(x, y, "sprites/armedalien.png"));
         setDirectionFaced("down");
+
     }
 
     /**
@@ -30,12 +32,13 @@ public class Alien extends Sprite {
         return;
     }
     public void createAlienArmy(CanvasWindow canvas){
+        alienGroup= new GraphicsGroup();
         double margin = canvas.getWidth() * 0.05;
         double spacing = canvas.getWidth() * 0.01;
         double y = canvas.getWidth() * 0.15;
         double x = margin;
         double length = 0;
-        for (int i = 0; i < 32; i++) {
+        for (int i = 0; i < 39; i++) {
             Alien alien= new Alien(x, y);
             length = length + alien.getImage().getImageWidth()+ spacing;
             if (length < canvas.getWidth() - 4 * margin) {
@@ -49,6 +52,7 @@ public class Alien extends Sprite {
             alienGroup.add(alien.getImage());
             aliens.add(alien);
         }
+        canvas.add(alienGroup);
     }
 
     /**
