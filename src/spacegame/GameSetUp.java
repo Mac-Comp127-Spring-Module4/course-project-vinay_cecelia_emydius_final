@@ -15,27 +15,24 @@ public class GameSetUp {
 
     private CanvasWindow canvas;
     private Alien alien;
-    private int lives;
+    private Player player;
    
     public GameSetUp(){
         canvas = new CanvasWindow("Space Shooter!", CANVAS_WIDTH, CANVAS_HEIGHT);
         canvas.setBackground(Color.BLACK);
-        lives = 3; 
-
         Player player = new Player(550-30, 600);
         player.addToCanvas(canvas);
 
 
         Alien alien = new Alien(300, 100);
         alien.createAlienArmy(canvas);
-        alien.removeAlien(laser, canvas);
-
+       // alien.removeAlien(laser, canvas);
         canvas.onMouseMove(event -> player.updatePosition(event.getPosition().getX(), canvas));
 
     }
 
     public void gameWinGameLoss(){
-        if(lives == 0){
+        if(player.getLives() == 0){
             endGame();
         }
         if(alien.getNumAliens() == 0){

@@ -4,17 +4,18 @@ import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.Image;
 
 public class Player extends Sprite {
-
+    private int lives;
     public Player(double x, double y) {
         super(x, y);
         setImage(new Image(x, y, "sprites/spaceship.png"));
         setDirectionFaced("up");
         System.out.println(getImage().getPosition());
+        lives=3;
     }
     
-    /**
-     * Not implemented yet
-     */
+    public int getLives() {
+        return lives;
+    }
     
     public void updatePosition(double input, CanvasWindow canvas) {
         this.getImage().setPosition(input - (this.getImage().getImageWidth()/2), this.getY());
@@ -26,15 +27,6 @@ public class Player extends Sprite {
             this.getImage().setPosition(canvas.getWidth() - (this.getImage().getImageWidth() + 5), this.getY());
         }  
     }
-
-
-    /**
-    * Adds paddles to canvas
-    */
-    // public void addToCanvas(CanvasWindow canvas) {
-    //     this.addToCanvas(canvas);
-    // }
-
 
     /**
      * Runs canvas's onKeyDown method only after added to canvas.

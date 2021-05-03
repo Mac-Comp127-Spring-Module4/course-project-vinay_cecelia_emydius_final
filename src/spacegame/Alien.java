@@ -17,12 +17,13 @@ public class Alien extends Sprite {
     private GraphicsGroup alienGroup;
     private List<Alien> aliens= new ArrayList<>();
     private int numAliens;
-    private Alien alien;
+    
    
     public Alien(double x, double y) {
         super(x, y);
         setImage(new Image(x, y, "sprites/armedalien.png"));
         setDirectionFaced("down");
+        //animationHandler();
 
     }
 
@@ -63,10 +64,10 @@ public class Alien extends Sprite {
     @Override
     public void animationHandler() {
         start = Instant.now();
-        getImage().getCanvas().animate(() -> {
+        this.getImage().getCanvas().animate(() -> {
             end = Instant.now();
-            if (Duration.between(start, end).toSecondsPart() >= 3) {
-                //shootLaser(); // This code works perfectly and everything in the if is executed every 3 seconds.
+            if (Duration.between(start, end).toSecondsPart() >= 3) {    
+                shootLaser(); // This code works perfectly and everything in the if is executed every 3 seconds.
                 // However, I can't call shootLaser() or else it throws a java.lang.reflect.InvocationTargetException
                 // and a java.util.ConcurrentModificationException? Idk what is going on and so I just decided to go sleep.
                 System.out.println("Alien shoots a laser!");
