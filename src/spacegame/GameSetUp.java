@@ -9,15 +9,9 @@ public class GameSetUp {
     private static final int CANVAS_WIDTH = 1100;
     private static final int CANVAS_HEIGHT = 700;
     private static final int CONSTANT_Y = 600;
+    private Laser laser;
 
     private CanvasWindow canvas;
-    private Player player;
-    private Laser testLaser;
-    private Alien alien;
-   
-    
-
-
     public GameSetUp(){
         canvas = new CanvasWindow("Space Shooter!", CANVAS_WIDTH, CANVAS_HEIGHT);
         canvas.setBackground(Color.BLACK);
@@ -27,8 +21,8 @@ public class GameSetUp {
 
 
         Alien alien = new Alien(300, 100);
-        //alien.addToCanvas(canvas);
         alien.createAlienArmy(canvas);
+       // alien.removeAlien(laser, canvas);
 
         canvas.onMouseMove(event -> player.updatePosition(event.getPosition().getX(), canvas));
 

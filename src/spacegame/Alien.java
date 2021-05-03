@@ -16,7 +16,7 @@ public class Alien extends Sprite {
     private Instant end;
     private GraphicsGroup alienGroup;
     private List<Alien> aliens= new ArrayList<>();
-
+   
     public Alien(double x, double y) {
         super(x, y);
         setImage(new Image(x, y, "sprites/armedalien.png"));
@@ -24,13 +24,7 @@ public class Alien extends Sprite {
 
     }
 
-    /**
-     * Not implemented yet
-     */
-    @Override
-    public void updatePosition() {
-        return;
-    }
+    
     public void createAlienArmy(CanvasWindow canvas){
         alienGroup= new GraphicsGroup();
         double margin = canvas.getWidth() * 0.05;
@@ -55,6 +49,10 @@ public class Alien extends Sprite {
         canvas.add(alienGroup);
     }
 
+    public GraphicsGroup getAlienGroup() {
+        return alienGroup;
+    }
+
     /**
      * Makes the alien shoot a laser every 3 seconds.
      */
@@ -72,25 +70,20 @@ public class Alien extends Sprite {
             }
         });
     }
+    private void collisionChecker(Laser laser, CanvasWindow canvas){
+        GraphicsObject possibleobj = canvas.getElementAt(alienGroup.getPosition());
+            if(alienGroup.getPosition()!=null){
+                if(laser.getBounds().equals(alienGroup.getBounds())){
+                canvas.remove(possibleobj);
+                alienGroup.remove(possibleobj);
+                }
+        } 
+    }
 
-    // public void collisionChecker(double newx, double newY, BrickWall bWall){
-    //     GraphicsObject possibleobj = canvas.getElementAt(newx + 2 * BALL_RADIUS, newY);
-    //         if(canvas.getElementAt(newx + 2 * BALL_RADIUS, newY) != null){
-    //         velocityY *= -1;
-    //         if(possibleobj instanceof Brick){
-    //             canvas.remove(possibleobj);
-    //             bWall.decrement();
-    //         }
-    //         }
-    //         else if (canvas.getElementAt(newx, newY + 2 * BALL_RADIUS) != null){
-    //         velocityX *= -1;
-    //         }  
-    //         if((newx <= 0 || newx >= maxX)){
-    //             velocityX = -velocityX;
-    //             }
-    //         if((newY < 0)){
-    //             velocityY = -velocityY;
-    //         }
-    // }
+    public void removeAlien(Laser laser, CanvasWindow canvas){
+        for (Alien alien : aliens) {
+            collisionChecker(laser, canvas);
+        }
+    }
 
 }

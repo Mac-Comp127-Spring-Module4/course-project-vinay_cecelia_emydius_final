@@ -93,6 +93,6 @@ public abstract class Sprite{
         newLaser.updatePosition();
     }
 
-    public abstract void updatePosition();
+   // public abstract void updatePosition();
     public abstract void animationHandler();
 }

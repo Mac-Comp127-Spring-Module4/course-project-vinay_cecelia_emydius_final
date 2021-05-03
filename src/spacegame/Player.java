@@ -11,12 +11,7 @@ public class Player extends Sprite {
         setDirectionFaced("up");
         System.out.println(getImage().getPosition());
     }
-    @Override
-    public void updatePosition() {
-        // TODO Auto-generated method stub
-        
-    }
-
+    
     /**
      * Not implemented yet
      */
