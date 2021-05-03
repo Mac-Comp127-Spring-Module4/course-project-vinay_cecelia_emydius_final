@@ -7,7 +7,7 @@ import edu.macalester.graphics.events.KeyboardEventHandler;
 
 public class GameSetUp {
     private static final int CANVAS_WIDTH = 1100;
-    private static final int CANVAS_HEIGHT = 700;
+    private static final int CANVAS_HEIGHT = 900;
     private static final int CONSTANT_Y = 600;
 
     private CanvasWindow canvas;
@@ -26,10 +26,11 @@ public class GameSetUp {
         player.addToCanvas(canvas);
 
 
-        Alien alien = new Alien(20, 20);
+        Alien alien = new Alien(300, 500);
         alien.addToCanvas(canvas);
+        //alien.createAlienArmy(canvas);
 
-        canvas.onMouseMove(event -> player.updatePosition());
+        canvas.onMouseMove(event -> player.updatePosition(event.getPosition().getX(), canvas));
 
     }
 

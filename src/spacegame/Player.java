@@ -11,17 +11,34 @@ public class Player extends Sprite {
         setDirectionFaced("up");
         System.out.println(getImage().getPosition());
     }
+    @Override
+    public void updatePosition() {
+        // TODO Auto-generated method stub
+        
+    }
 
     /**
      * Not implemented yet
      */
-    @Override
-    public void updatePosition() {
+    
+    public void updatePosition(double input, CanvasWindow canvas) {
+        this.getImage().setPosition(input - (this.getImage().getImageWidth()/2), this.getY());
 
-
-        return;
+        if (this.getX() < 5) {
+            this.getImage().setPosition(2, this.getY());
+        }
+        if (this.getX() + this.getImage().getImageWidth() > canvas.getWidth()) {
+            this.getImage().setPosition(canvas.getWidth() - (this.getImage().getImageWidth() + 5), this.getY());
+        }  
     }
 
+
+    /**
+    * Adds paddles to canvas
+    */
+    // public void addToCanvas(CanvasWindow canvas) {
+    //     this.addToCanvas(canvas);
+    // }
 
 
     /**
