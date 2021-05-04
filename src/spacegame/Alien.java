@@ -34,8 +34,7 @@ public class Alien extends Sprite {
     }
 
     /**
-     * 
-     * @param canvas
+     * Creates an alien army on the canvas that spaces them apart
      */
     public static void createAlienArmy(CanvasWindow canvas){
         double margin = canvas.getWidth() * 0.03;
@@ -58,13 +57,15 @@ public class Alien extends Sprite {
         }
     }
 
+    /**
+     * Method that
+     */
     public static List<List<Alien>> getAlienArmyList() {
         return aliens;
     }
 
     /**
-     * 
-     * @return
+     * Method that holds the total number of aliens and returns that value when called
      */
     public int getNumAliens() {
         return numAliens;
@@ -80,7 +81,9 @@ public class Alien extends Sprite {
     }
 
     /**
-     * @param laser
+     * Method to check if the laser has collided with any of the aliens that then removes that alien
+     * if the lasers positions equals the aliens position
+     * @param laser 
      * @param canvas
      */
     private void collisionChecker(Laser laser, CanvasWindow canvas){
@@ -94,7 +97,7 @@ public class Alien extends Sprite {
     }
 
     /**
-     * 
+     * Removes an alien when collisionChecker is called (and it's true)
      * @param laser
      * @param canvas
      */

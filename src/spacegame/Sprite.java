@@ -9,7 +9,9 @@ import edu.macalester.graphics.Image;
 import edu.macalester.graphics.Line;
 
 /**
- * 
+ * This class creates the various images we used for our space class game,
+ * while also including various methods that set position, the alien is alive or dead, 
+ * shoots the laser, and sets the direction that image or Sprite sound face
  */
 public abstract class Sprite{
 
@@ -21,7 +23,7 @@ public abstract class Sprite{
     private int directionFaced;
 
     /**
-     * 
+     * Creates the Sprite
      * @param x
      * @param y
      */
@@ -84,7 +86,7 @@ public abstract class Sprite{
     }
 
     /**
-     * 
+     * Sets the direction that the Sprite image should face
      * @param dir
      */
     public void setDirectionFaced(String dir) {
@@ -96,7 +98,7 @@ public abstract class Sprite{
     }
 
     /**
-     * 
+     * Adds the image or Sprite created to canvas then calls the animation handler
      * @param canvas
      */
     public void addToCanvas(CanvasWindow canvas){
@@ -107,7 +109,8 @@ public abstract class Sprite{
 
 
     /**
-     * 
+     * This method creates a new laser, adds it to canvas, and updates it position as the 
+     * laser is moving
      */
     public void shootLaser() {
         Laser newLaser = new Laser(image.getX()+image.getImageWidth()/2, y, 10 * directionFaced); 

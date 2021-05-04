@@ -7,7 +7,9 @@ import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.Image;
 
 /**
- * 
+ * Player class creates the player (or spaceship at the bottom of the screen), contains a method to 
+ * ensure the player doesn't off the canvas, as well as a method to have the player shoot a laser when  
+ * a key is pressed. 
  */
 public class Player extends Sprite {
     private int lives;
@@ -23,7 +25,7 @@ public class Player extends Sprite {
     }
     
     /**
-     * 
+     * returns the number of lives 
      * @return
      */
     public int getLives() {
@@ -32,7 +34,7 @@ public class Player extends Sprite {
     
     /**
      * Checks for canvas boundaries to make sure player does not go out of the canvas
-     * frame and also, ensures that the paddle movement follows the mouse.
+     * frame and also, ensures that the player movement follows the mouse.
      * @param input
      * @param canvas
      */
@@ -62,5 +64,9 @@ public class Player extends Sprite {
             }
         });
     }
+
+     /**
+     * Checks to see if an alien laser has hit the player, and if so, the player loses a life
+     */
     
 }
