@@ -1,13 +1,17 @@
 package spacegame;
 import java.awt.Color;
+import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import edu.macalester.graphics.*;
 import edu.macalester.graphics.events.KeyboardEvent;
 import edu.macalester.graphics.events.KeyboardEventHandler;
 
 public class GameSetUp {
-    Scanner sc= new Scanner(System.in);
+    Scanner sc = new Scanner(System.in);
     private static final int CANVAS_WIDTH = 1100;
     private static final int CANVAS_HEIGHT = 700;
     private static final int CONSTANT_Y = 600;
@@ -29,10 +33,29 @@ public class GameSetUp {
 
         Alien alien = new Alien(300, 100);
         alien.addToCanvas(canvas);
-        // Alien.createAlienArmy(canvas);
-       // alien.removeAlien(laser, canvas);
+        Alien.createAlienArmy(canvas);
+    //    alien.removeAlien(laser, canvas);
         canvas.onMouseMove(event -> player.updatePosition(event.getPosition().getX(), canvas));
-
+        
+        ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
+        Runnable task = () -> {
+            double distance = 1100;
+            int closestColumnIndex = 0;
+            for (int i = 0; i < Alien.getAlienArmyList().size(); i++) {
+                if (Alien.getAlienArmyList().size() > 0) {
+                    double currentDistance = Math.abs(
+                        Alien.getAlienArmyList().get(i).get(0).getCenterX() - player.getCenterX());
+                    if (currentDistance < distance) {
+                        distance = currentDistance;
+                        closestColumnIndex = i;
+                    }
+                }
+            }
+            List<Alien> closestColumn = Alien.getAlienArmyList().get(closestColumnIndex);
+            closestColumn.get(closestColumn.size()).shootLaser();
+            System.out.println("runs");
+        };
+        executor.scheduleAtFixedRate(task, 3, 3, TimeUnit.SECONDS);
     }
 
     /**

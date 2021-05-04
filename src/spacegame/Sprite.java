@@ -54,6 +54,10 @@ public abstract class Sprite{
     public double getX() {
         return x;
     }
+    
+    public double getCenterX() {
+        return x + getImage().getWidth()/2;
+    }
 
     public void setY(double y) {
         this.y = y;

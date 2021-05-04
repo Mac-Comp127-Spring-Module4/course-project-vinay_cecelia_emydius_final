@@ -17,7 +17,7 @@ import edu.macalester.graphics.Image;
 public class Alien extends Sprite {
     
     private static GraphicsGroup alienGroup = new GraphicsGroup();
-    private static List<Alien> aliens = new ArrayList<>();
+    private static List<List<Alien>> aliens = new ArrayList<>();
     private static int numAliens;
     
    /**
@@ -29,7 +29,6 @@ public class Alien extends Sprite {
         super(x, y);
         setImage(new Image(x, y, "sprites/armedalien.png"));
         setDirectionFaced("down");
-
     }
 
     /**
@@ -37,29 +36,49 @@ public class Alien extends Sprite {
      * @param canvas
      */
     public static void createAlienArmy(CanvasWindow canvas){
-        double margin = canvas.getWidth() * 0.05;
+        double margin = canvas.getWidth() * 0.03;
         double spacing = canvas.getWidth() * 0.01;
-        double y = canvas.getWidth() * 0.15;
+        // double y = canvas.getWidth() * 0.15;
         double x = margin;
         double length = 0;
-        for (int i = 0; i < 39; i++) {
-            Alien alien= new Alien(x, y);
-            length = length + alien.getImage().getImageWidth() + spacing;
-            if (length < canvas.getWidth() - 4 * margin) {
-                x = x + alien.getImage().getImageWidth() + spacing;
-            } 
-            else {
-                x = margin;
-                length = 0;
+
+        for (int i = 0; i < 13; i++) {
+            double y = canvas.getWidth() * 0.15;
+            aliens.add(new ArrayList<>());
+            for (int j = 0; j < 3; j++) {
+                Alien alien = new Alien(x, y);
+                length = length + alien.getImage().getImageWidth() + spacing;
                 y = y + spacing + alien.getImage().getImageHeight();
+                alien.addToCanvas(canvas);
+                aliens.get(i).add(alien);
+                numAliens++;
             }
-            alienGroup.add(alien.getImage());
-            aliens.add(alien);
-            numAliens++;
+            x = x + aliens.get(0).get(0).getImage().getWidth() + canvas.getWidth() * 0.015;
         }
-        canvas.add(alienGroup);
-        for (int i = 0; i < aliens.size(); i++)
-            aliens.get(i).animationHandler();
+
+        // for (int i = 0; i < 39; i++) {
+        //     Alien alien= new Alien(x, y);
+        //     length = length + alien.getImage().getImageWidth() + spacing;
+        //     if (length < canvas.getWidth() - 4 * margin) {
+        //         x = x + alien.getImage().getImageWidth() + spacing;
+        //     } 
+        //     else {
+        //         x = margin;
+        //         length = 0;
+        //         y = y + spacing + alien.getImage().getImageHeight();
+        //     }
+        //     // alienGroup.add(alien.getImage());
+        //     alien.addToCanvas(canvas);
+        //     aliens.add(alien);
+        //     numAliens++;
+        // }
+        // canvas.add(alienGroup);
+        // for (int i = 0; i < aliens.size(); i++)
+        //     aliens.get(i).animationHandler();
+    }
+
+    public static List<List<Alien>> getAlienArmyList() {
+        return aliens;
     }
 
     /**
@@ -75,11 +94,11 @@ public class Alien extends Sprite {
      */
     @Override
     public void animationHandler() {
-        ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
-        Runnable task = () -> {
-            shootLaser();
-        };
-        executor.scheduleAtFixedRate(task, 3, 3, TimeUnit.SECONDS);
+        // ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
+        // Runnable task = () -> {
+        //     shootLaser();
+        // };
+        // executor.scheduleAtFixedRate(task, 3, 3, TimeUnit.SECONDS);
 
     }
 
