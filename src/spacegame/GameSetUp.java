@@ -7,21 +7,24 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import edu.macalester.graphics.*;
-import edu.macalester.graphics.events.KeyboardEvent;
-import edu.macalester.graphics.events.KeyboardEventHandler;
 
+    /**
+     * This class sets up the game, using methods to add graphic objects to canvas,
+     * a method to dictate the conditions when the player wins or loses, and an handler method
+     * so the aliens shoot in a coordinated fashion. There is also a main method at the end. 
+     */
 public class GameSetUp {
     Scanner sc = new Scanner(System.in);
     private static final int CANVAS_WIDTH = 1100;
     private static final int CANVAS_HEIGHT = 700;
-    private static final int CONSTANT_Y = 600;
 
     private CanvasWindow canvas;
     private Alien alien;
     private Player player;
    
     /**
-     * 
+     * Game Set Up Method that creates canvas, adds the alien army and player to canvas, 
+     * calls other methods, and gets the player to move on mouse command. 
      */
     public GameSetUp(){
         canvas = new CanvasWindow("Space Shooter!", CANVAS_WIDTH, CANVAS_HEIGHT);
@@ -39,7 +42,7 @@ public class GameSetUp {
     }
 
     /**
-     * 
+     * Method that either ends the game is lives = 0 or tells the player they won if aliens = 0
      */
     public void gameWinGameLoss(){
         if(player.getLives() == 0){
@@ -48,12 +51,11 @@ public class GameSetUp {
         if(alien.getNumAliens() == 0){
             gameWinner();
         }
-        // reset method here or in player class, for after the alien hits the player
             
     }
 
     /**
-     * 
+     * Print method for end game and then asks if the player wants to start the game over again
      */
     public void endGame(){
         GraphicsText loss = new GraphicsText("Game Over", CANVAS_WIDTH / 2, CANVAS_HEIGHT / 2);

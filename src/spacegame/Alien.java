@@ -12,7 +12,9 @@ import edu.macalester.graphics.GraphicsObject;
 import edu.macalester.graphics.Image;
 
 /**
- * 
+ * The class draws the aliens used in the game, extended from our Sprite class. It includes methods to 
+ * create multiple aliens, the number of aliens there are, a collision checker for when a laser collides
+ * with an alien, and a remove method
  */
 public class Alien extends Sprite {
     
@@ -21,9 +23,9 @@ public class Alien extends Sprite {
     private static int numAliens;
     
    /**
-    * 
-    * @param x
-    * @param y
+    * Draws an alien based on the x and y parameters
+    * @param x      The width of the alien
+    * @param y      The height of the alien
     */
     public Alien(double x, double y) {
         super(x, y);
