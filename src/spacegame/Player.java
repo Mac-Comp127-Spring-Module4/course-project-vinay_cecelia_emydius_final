@@ -1,5 +1,8 @@
 package spacegame;
 
+import java.time.Duration;
+import java.time.Instant;
+
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.Image;
 
@@ -8,6 +11,9 @@ import edu.macalester.graphics.Image;
  */
 public class Player extends Sprite {
     private int lives;
+    private Instant start;
+    private Instant stop;
+
     public Player(double x, double y) {
         super(x, y);
         setImage(new Image(x, y, "sprites/spaceship.png"));
@@ -32,7 +38,8 @@ public class Player extends Sprite {
      */
     public void updatePosition(double input, CanvasWindow canvas) {
         this.getImage().setPosition(input - (this.getImage().getImageWidth()/2), this.getY());
-
+        setX(getImage().getX());
+        setY(getImage().getY());
         if (this.getX() < 5) {
             this.getImage().setPosition(2, this.getY());
         }
@@ -46,7 +53,14 @@ public class Player extends Sprite {
      */
     @Override
     public void animationHandler() {
-        getImage().getCanvas().onKeyUp(event -> shootLaser());
+        start = Instant.now();
+        getImage().getCanvas().onKeyUp(event -> {
+            stop = Instant.now();
+            if (Duration.between(start, stop).toMillis() > 2000) {
+                shootLaser();
+                start = Instant.now();
+            }
+        });
     }
     
 }

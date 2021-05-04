@@ -110,8 +110,6 @@ public abstract class Sprite{
      * 
      */
     public void shootLaser() {
-        // System.out.println("This runs");
-        // System.out.println("x: " + x + ", y: " + y);
         Laser newLaser = new Laser(image.getX()+image.getImageWidth()/2, y, 10 * directionFaced); 
         canvas.add(newLaser);
         newLaser.updatePosition();

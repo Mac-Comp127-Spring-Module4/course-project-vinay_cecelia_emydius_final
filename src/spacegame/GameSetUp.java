@@ -15,7 +15,6 @@ public class GameSetUp {
     private static final int CANVAS_WIDTH = 1100;
     private static final int CANVAS_HEIGHT = 700;
     private static final int CONSTANT_Y = 600;
-    private Laser laser;
 
     private CanvasWindow canvas;
     private Alien alien;
@@ -27,35 +26,16 @@ public class GameSetUp {
     public GameSetUp(){
         canvas = new CanvasWindow("Space Shooter!", CANVAS_WIDTH, CANVAS_HEIGHT);
         canvas.setBackground(Color.BLACK);
-        Player player = new Player(550-30, 600);
+        player = new Player(550-30, 600);
         player.addToCanvas(canvas);
 
 
-        Alien alien = new Alien(300, 100);
-        alien.addToCanvas(canvas);
+        // Alien alien = new Alien(300, 100);
+        // alien.addToCanvas(canvas);
         Alien.createAlienArmy(canvas);
     //    alien.removeAlien(laser, canvas);
+        alienShootingHandler();
         canvas.onMouseMove(event -> player.updatePosition(event.getPosition().getX(), canvas));
-        
-        ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
-        Runnable task = () -> {
-            double distance = 1100;
-            int closestColumnIndex = 0;
-            for (int i = 0; i < Alien.getAlienArmyList().size(); i++) {
-                if (Alien.getAlienArmyList().size() > 0) {
-                    double currentDistance = Math.abs(
-                        Alien.getAlienArmyList().get(i).get(0).getCenterX() - player.getCenterX());
-                    if (currentDistance < distance) {
-                        distance = currentDistance;
-                        closestColumnIndex = i;
-                    }
-                }
-            }
-            List<Alien> closestColumn = Alien.getAlienArmyList().get(closestColumnIndex);
-            closestColumn.get(closestColumn.size()).shootLaser();
-            System.out.println("runs");
-        };
-        executor.scheduleAtFixedRate(task, 3, 3, TimeUnit.SECONDS);
     }
 
     /**
@@ -117,7 +97,30 @@ public class GameSetUp {
         canvas.closeWindow();
     }
     
-
+    /**
+     * 
+     */
+    public void alienShootingHandler() {
+        ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
+        Runnable task = () -> {
+            double distance = 1100;
+            int closestColumnIndex = 0;
+            for (int i = 0; i < Alien.getAlienArmyList().size(); i++) {
+                if (Alien.getAlienArmyList().size() > 0) {
+                    double currentDistance = Math.abs(
+                        Alien.getAlienArmyList().get(i).get(0).getCenterX()
+                         - player.getCenterX());
+                    if (currentDistance < distance) {
+                        distance = currentDistance;
+                        closestColumnIndex = i;
+                    }
+                }
+            }
+            List<Alien> closestColumn = Alien.getAlienArmyList().get(closestColumnIndex);
+            closestColumn.get(closestColumn.size()-1).shootLaser();
+        };
+        executor.scheduleAtFixedRate(task, 3, 3, TimeUnit.SECONDS);
+    }
    
 
     

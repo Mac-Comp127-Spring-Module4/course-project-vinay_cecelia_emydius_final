@@ -38,7 +38,6 @@ public class Alien extends Sprite {
     public static void createAlienArmy(CanvasWindow canvas){
         double margin = canvas.getWidth() * 0.03;
         double spacing = canvas.getWidth() * 0.01;
-        // double y = canvas.getWidth() * 0.15;
         double x = margin;
         double length = 0;
 
@@ -55,26 +54,6 @@ public class Alien extends Sprite {
             }
             x = x + aliens.get(0).get(0).getImage().getWidth() + canvas.getWidth() * 0.015;
         }
-
-        // for (int i = 0; i < 39; i++) {
-        //     Alien alien= new Alien(x, y);
-        //     length = length + alien.getImage().getImageWidth() + spacing;
-        //     if (length < canvas.getWidth() - 4 * margin) {
-        //         x = x + alien.getImage().getImageWidth() + spacing;
-        //     } 
-        //     else {
-        //         x = margin;
-        //         length = 0;
-        //         y = y + spacing + alien.getImage().getImageHeight();
-        //     }
-        //     // alienGroup.add(alien.getImage());
-        //     alien.addToCanvas(canvas);
-        //     aliens.add(alien);
-        //     numAliens++;
-        // }
-        // canvas.add(alienGroup);
-        // for (int i = 0; i < aliens.size(); i++)
-        //     aliens.get(i).animationHandler();
     }
 
     public static List<List<Alien>> getAlienArmyList() {
@@ -90,16 +69,12 @@ public class Alien extends Sprite {
     }
 
     /**
-     * Makes the alien shoot a laser every 3 seconds.
+     * Not implemented yet.
+     * Will make alien move depending on position.
      */
     @Override
     public void animationHandler() {
-        // ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
-        // Runnable task = () -> {
-        //     shootLaser();
-        // };
-        // executor.scheduleAtFixedRate(task, 3, 3, TimeUnit.SECONDS);
-
+        
     }
 
     /**
