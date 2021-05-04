@@ -33,13 +33,16 @@ public class Laser extends Line{
      */
     public void updatePosition() {
         getCanvas().animate(() -> {
+        // while (getCanvas() != null) {
             if (getCanvas() != null) {
                 this.moveBy(0, dYVelocity);
+                getCanvas().draw();
                 if (getY() <= 0 || getY() >= getCanvas().getHeight()) {
                     getCanvas().remove(this);
                     System.out.println("Removed!");
                 }
             }
+        // }
         });
     }
 

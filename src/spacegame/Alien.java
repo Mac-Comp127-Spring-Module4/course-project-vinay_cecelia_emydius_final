@@ -1,9 +1,10 @@
 package spacegame;
 
-import java.time.Duration;
-import java.time.Instant;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.GraphicsGroup;
@@ -15,11 +16,9 @@ import edu.macalester.graphics.Image;
  */
 public class Alien extends Sprite {
     
-    private Instant start;
-    private Instant end;
-    private GraphicsGroup alienGroup;
-    private List<Alien> aliens= new ArrayList<>();
-    private int numAliens;
+    private static GraphicsGroup alienGroup = new GraphicsGroup();
+    private static List<Alien> aliens = new ArrayList<>();
+    private static int numAliens;
     
    /**
     * 
@@ -30,7 +29,6 @@ public class Alien extends Sprite {
         super(x, y);
         setImage(new Image(x, y, "sprites/armedalien.png"));
         setDirectionFaced("down");
-        //animationHandler();
 
     }
 
@@ -38,8 +36,7 @@ public class Alien extends Sprite {
      * 
      * @param canvas
      */
-    public void createAlienArmy(CanvasWindow canvas){
-        alienGroup= new GraphicsGroup();
+    public static void createAlienArmy(CanvasWindow canvas){
         double margin = canvas.getWidth() * 0.05;
         double spacing = canvas.getWidth() * 0.01;
         double y = canvas.getWidth() * 0.15;
@@ -47,7 +44,7 @@ public class Alien extends Sprite {
         double length = 0;
         for (int i = 0; i < 39; i++) {
             Alien alien= new Alien(x, y);
-            length = length + alien.getImage().getImageWidth()+ spacing;
+            length = length + alien.getImage().getImageWidth() + spacing;
             if (length < canvas.getWidth() - 4 * margin) {
                 x = x + alien.getImage().getImageWidth() + spacing;
             } 
@@ -61,6 +58,8 @@ public class Alien extends Sprite {
             numAliens++;
         }
         canvas.add(alienGroup);
+        for (int i = 0; i < aliens.size(); i++)
+            aliens.get(i).animationHandler();
     }
 
     /**
@@ -71,24 +70,19 @@ public class Alien extends Sprite {
         return numAliens;
     }
 
-
     /**
      * Makes the alien shoot a laser every 3 seconds.
      */
     @Override
     public void animationHandler() {
-        start = Instant.now();
-        this.getImage().getCanvas().animate(() -> {
-            end = Instant.now();
-            if (Duration.between(start, end).toSecondsPart() >= 3) {    
-                shootLaser(); // This code works perfectly and everything in the if is executed every 3 seconds.
-                // However, I can't call shootLaser() or else it throws a java.lang.reflect.InvocationTargetException
-                // and a java.util.ConcurrentModificationException? Idk what is going on and so I just decided to go sleep.
-                System.out.println("Alien shoots a laser!");
-                start = Instant.now();
-            }
-        });
+        ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
+        Runnable task = () -> {
+            shootLaser();
+        };
+        executor.scheduleAtFixedRate(task, 3, 3, TimeUnit.SECONDS);
+
     }
+
     /**
      * @param laser
      * @param canvas

@@ -28,7 +28,8 @@ public class GameSetUp {
 
 
         Alien alien = new Alien(300, 100);
-        alien.createAlienArmy(canvas);
+        alien.addToCanvas(canvas);
+        // Alien.createAlienArmy(canvas);
        // alien.removeAlien(laser, canvas);
         canvas.onMouseMove(event -> player.updatePosition(event.getPosition().getX(), canvas));
 
