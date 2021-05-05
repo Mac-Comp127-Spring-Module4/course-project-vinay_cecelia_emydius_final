@@ -109,7 +109,7 @@ public class GameSetUp {
     }
 
     /**
-     * 
+     * method to reset the game if someone dictates they want to play again
      */
     public void resetGame(){
         new GameSetUp();
