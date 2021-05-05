@@ -20,6 +20,7 @@ public class Alien extends Sprite {
     
     private static GraphicsGroup alienGroup = new GraphicsGroup();
     private static List<List<Alien>> aliens = new ArrayList<>();
+    private static GameSetUp game;
     private static int numAliens;
     
    /**
@@ -36,7 +37,8 @@ public class Alien extends Sprite {
     /**
      * Creates an alien army on the canvas that spaces them apart
      */
-    public static void createAlienArmy(CanvasWindow canvas){
+    public static void createAlienArmy(CanvasWindow canvas, GameSetUp gameSetUp){
+        game = gameSetUp;
         double margin = canvas.getWidth() * 0.03;
         double spacing = canvas.getWidth() * 0.01;
         double x = margin;
@@ -57,6 +59,39 @@ public class Alien extends Sprite {
         }
     }
 
+    public static void removeAlienArmy(CanvasWindow canvas) {
+        for (int i = 0; i < aliens.size(); i++) {
+            for (int j = 0; j < aliens.get(i).size(); j++) {
+                canvas.remove(aliens.get(i).get(j).getImage());
+                aliens.get(i).remove(j);
+                j--;
+            }
+            aliens.remove(i);
+            i--;
+        }
+    }
+
+    public static void updateAlienList() {
+        int newAlienCount = 0;
+        for (int i = 0; i < aliens.size(); i++) {
+            if (aliens.get(i).size() == 0) {
+                aliens.remove(i);
+                i--;
+                game.alienShootingHandler();
+                continue;
+            }
+            for (int j = 0; j < aliens.get(i).size(); j++) {
+                if (aliens.get(i).get(j).getCanvas() == null) {
+                    aliens.get(i).remove(j);
+                    j--;
+                }
+                else newAlienCount++;
+            }
+        }
+        numAliens = newAlienCount;
+        System.out.println("numAliens = " + numAliens);
+    }
+
     /**
      * Method that
      */
@@ -67,7 +102,7 @@ public class Alien extends Sprite {
     /**
      * Method that holds the total number of aliens and returns that value when called
      */
-    public int getNumAliens() {
+    public static int getNumAliens() {
         return numAliens;
     }
 
@@ -93,7 +128,7 @@ public class Alien extends Sprite {
                 canvas.remove(possibleobj);
                 alienGroup.remove(possibleobj);
                 }
-        } 
+        }
     }
 
     /**

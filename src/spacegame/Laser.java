@@ -34,20 +34,37 @@ public class Laser extends Line{
      * 
      */
     public void updatePosition() {
-        getCanvas().animate(() -> {
-        // while (getCanvas() != null) {
-            if (getCanvas() != null) {
-                this.moveBy(0, dYVelocity);
-                getCanvas().draw();
-                if (collisionChecker()) {
+        try {
+            getCanvas().animate(() -> {
+                if (getCanvas() != null) {
+                    this.moveBy(0, dYVelocity);
+                    getCanvas().draw();
+                    if (collisionChecker()) {
+                        Alien.updateAlienList();
+                    }
+                    else if (getY() <= 0 || getY() >= getCanvas().getHeight()) {
+                        getCanvas().remove(this);
+                        System.out.println("Removed!");
+                    }
                 }
-                else if (getY() <= 0 || getY() >= getCanvas().getHeight()) {
-                    getCanvas().remove(this);
-                    System.out.println("Removed!");
-                }
-            }
-        // }
-        });
+            });
+        } catch (Exception e) {
+            //TODO: handle exception
+            System.out.println("ConcurrentModificationException?");
+        }
+        
+        // getCanvas().animate(() -> {
+        //     if (getCanvas() != null) {
+        //         this.moveBy(0, dYVelocity);
+        //         getCanvas().draw();
+        //         if (collisionChecker()) {
+        //         }
+        //         else if (getY() <= 0 || getY() >= getCanvas().getHeight()) {
+        //             getCanvas().remove(this);
+        //             System.out.println("Removed!");
+        //         }
+        //     }
+        // });
     }
 
     public boolean collisionChecker() {

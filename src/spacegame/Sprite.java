@@ -89,6 +89,10 @@ public abstract class Sprite{
         return image;
     }
 
+    public CanvasWindow getCanvas() {
+        return getImage().getCanvas();
+    }
+
     /**
      * Sets the direction that the Sprite image should face
      * @param dir
