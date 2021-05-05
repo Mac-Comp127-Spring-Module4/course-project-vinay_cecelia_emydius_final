@@ -69,6 +69,10 @@ public abstract class Sprite{
         return y;
     }
 
+    public double getCenterY() {
+        return y + getImage().getHeight()/2;
+    }
+
     public void setDead(boolean dead) {
         this.dead = dead;
     }
@@ -113,7 +117,8 @@ public abstract class Sprite{
      * laser is moving
      */
     public void shootLaser() {
-        Laser newLaser = new Laser(image.getX()+image.getImageWidth()/2, y, 10 * directionFaced); 
+        // Laser newLaser = new Laser(image.getX()+image.getImageWidth()/2, y, 10 * directionFaced);
+        Laser newLaser = new Laser(getCenterX(), getCenterY()+image.getHeight()/2*directionFaced, 10 * directionFaced); 
         canvas.add(newLaser);
         newLaser.updatePosition();
     }

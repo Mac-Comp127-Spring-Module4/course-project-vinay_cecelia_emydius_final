@@ -1,6 +1,8 @@
 package spacegame;
 
 import edu.macalester.graphics.*;
+import edu.macalester.graphics.Point;
+
 import java.awt.*;
 
 /**
@@ -37,13 +39,25 @@ public class Laser extends Line{
             if (getCanvas() != null) {
                 this.moveBy(0, dYVelocity);
                 getCanvas().draw();
-                if (getY() <= 0 || getY() >= getCanvas().getHeight()) {
+                if (collisionChecker()) {
+                }
+                else if (getY() <= 0 || getY() >= getCanvas().getHeight()) {
                     getCanvas().remove(this);
                     System.out.println("Removed!");
                 }
             }
         // }
         });
+    }
+
+    public boolean collisionChecker() {
+        GraphicsObject potentialObject = getCanvas().getElementAt(getPosition().subtract(Point.UNIT_Y));
+        if (potentialObject != null) {
+            getCanvas().remove(potentialObject);
+            getCanvas().remove(this);
+            return true;
+        }
+        else return false;
     }
 
     
