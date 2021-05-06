@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 /**
- * 
+ * Laser class that creates the laser, updates its position, and checks for a collision. 
  */
 public class Laser extends Line{
     private double dYVelocity;
@@ -39,6 +39,9 @@ public class Laser extends Line{
         laserList.add(this);
     }
 
+    /**
+    * Method that clears the laser from the canvas. 
+    */
     public static void clearLasers() {
         for (int i = 0; i < laserList.size(); i++) {
             if (laserList.get(i).getCanvas() != null)
@@ -49,7 +52,8 @@ public class Laser extends Line{
     }
 
     /**
-     * 
+     * Method that updates the position of the laser and checks fro a collsion as it
+     * moves over the canvas. 
      */
     public void updatePosition() {
         // try {
@@ -99,6 +103,10 @@ public class Laser extends Line{
         // });
     }
 
+    /**
+    * Method that checks for a collision of the laser with either a player or an alien, returns true
+    * or false
+    */
     public boolean collisionChecker() {
         GraphicsObject potentialObject = getCanvas().getElementAt(getPosition().subtract(Point.UNIT_Y));
         if (potentialObject != null && potentialObject.getY() > getCanvas().getWidth() * 0.14) {

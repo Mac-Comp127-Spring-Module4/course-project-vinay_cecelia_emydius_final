@@ -31,7 +31,8 @@ public class GameSetUp {
    
     /**
      * Game Set Up Method that creates canvas, adds the alien army and player to canvas, 
-     * calls other methods, and gets the player to move on mouse command. 
+     * calls other methods, creates a life meter to track the number of lives,
+     * and gets the player to move on mouse command. 
      */
     public GameSetUp(){
         canvas = new CanvasWindow("Space Shooter!", CANVAS_WIDTH, CANVAS_HEIGHT);
@@ -75,6 +76,11 @@ public class GameSetUp {
             }
         });
     }
+
+    /**
+     * A method that resets the game, subtracts off a life if lost, and then 
+     * runs the game again. 
+     */
 
     public void resetEnvironment() {
         // player = new Player(550-30, 600);
@@ -184,7 +190,8 @@ public class GameSetUp {
     }
     
     /**
-     * 
+     * A method that gets the position of the aliens in the army and then at "random"
+     * allows them to shoot back at the player. 
      */
     public void alienShootingHandler() {
         // ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
