@@ -4,6 +4,9 @@ import edu.macalester.graphics.*;
 import edu.macalester.graphics.Point;
 
 import java.awt.*;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 
@@ -11,7 +14,8 @@ import java.awt.*;
 public class Laser extends Line{
     private double dYVelocity;
     private static final Color LINE_COLOR= new Color(200,150,100);
-
+    private ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
+    
     /**
      * Constructor that makes a super reference to the Line class
      * @param startingPointx
@@ -34,8 +38,25 @@ public class Laser extends Line{
      * 
      */
     public void updatePosition() {
-        try {
-            getCanvas().animate(() -> {
+        // try {
+        //     getCanvas().animate(() -> {
+        //         if (getCanvas() != null) {
+        //             this.moveBy(0, dYVelocity);
+        //             getCanvas().draw();
+        //             if (collisionChecker()) {
+        //                 Alien.updateAlienList();
+        //             }
+        //             else if (getY() <= 0 || getY() >= getCanvas().getHeight()) {
+        //                 getCanvas().remove(this);
+        //                 System.out.println("Removed!");
+        //             }
+        //         }
+        //     });
+        // } catch (Exception e) {
+        //     //TODO: handle exception
+        //     System.out.println("ConcurrentModificationException?");
+
+            Runnable task = () -> {
                 if (getCanvas() != null) {
                     this.moveBy(0, dYVelocity);
                     getCanvas().draw();
@@ -47,11 +68,8 @@ public class Laser extends Line{
                         System.out.println("Removed!");
                     }
                 }
-            });
-        } catch (Exception e) {
-            //TODO: handle exception
-            System.out.println("ConcurrentModificationException?");
-        }
+            };
+            executor.scheduleAtFixedRate(task, 0, 16, TimeUnit.MILLISECONDS);
         
         // getCanvas().animate(() -> {
         //     if (getCanvas() != null) {

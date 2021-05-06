@@ -57,6 +57,8 @@ public class GameSetUp {
         // alien.addToCanvas(canvas);
         Alien.createAlienArmy(canvas, this);
     //    alien.removeAlien(laser, canvas);
+        canvas.draw();
+        canvas.pause(3000);
         alienShootingHandler();
         canvas.onMouseMove(event -> player.updatePosition(event.getPosition().getX(), canvas));
         canvas.animate(() -> {
@@ -167,7 +169,7 @@ public class GameSetUp {
             System.out.println("The executor scheduler is working.");
             // System.out.println(Alien.getAlienArmyList());
         };
-        executor.scheduleAtFixedRate(task, 3, 3, TimeUnit.SECONDS);
+        executor.scheduleAtFixedRate(task, 0, 3, TimeUnit.SECONDS);
     }
    
 
