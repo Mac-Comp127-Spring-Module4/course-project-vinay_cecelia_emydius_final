@@ -8,6 +8,7 @@ import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import edu.macalester.graphics.*;
+import edu.macalester.graphics.ui.Button;
 
 //comment to push the file, delete now
 
@@ -123,22 +124,37 @@ public class GameSetUp {
         canvas.add(loss);
         canvas.draw();
         canvas.pause(2000);
-        GraphicsText restart= new GraphicsText("Restart? (Y/N)", CANVAS_WIDTH / 2 - 100, CANVAS_HEIGHT / 2 + 100);
-        restart.setFontSize(20);
-        restart.setFillColor(Color.red);
+        Button restart = new Button("Restart");
+        restart.setPosition(CANVAS_WIDTH / 2 - 100, CANVAS_HEIGHT / 2 + 100);
+        Button exit = new Button("Exit");
+        exit.setPosition(CANVAS_WIDTH / 2 - 100, CANVAS_HEIGHT / 2 + 150);
+        // GraphicsText restart= new GraphicsText("Restart? (Y/N)", CANVAS_WIDTH / 2 - 100, CANVAS_HEIGHT / 2 + 100);
+        // restart.setFontSize(20);
+        // restart.setFillColor(Color.red);
         canvas.add(restart);
+        canvas.add(exit);
         canvas.draw();
-        String reset = sc.nextLine();
-        System.out.println(reset);
-        if (reset.toLowerCase().equals("y")){
+        // String reset = sc.nextLine();
+        // System.out.println(reset);
+        restart.onClick(() -> {
             canvas.remove(loss);
             canvas.remove(restart);
+            canvas.remove(exit);
             resetEnvironment();
-        }
-        else{
-            System.out.println("close window");
+        });
+        exit.onClick(() -> {
             canvas.closeWindow();
-        }
+        });
+        // if (reset.toLowerCase().equals("y")){
+        //     canvas.remove(loss);
+        //     canvas.remove(restart);
+        //     canvas.remove(exit);
+        //     resetEnvironment();
+        // }
+        // else{
+        //     System.out.println("close window");
+        //     canvas.closeWindow();
+        // }
         
     }
 
