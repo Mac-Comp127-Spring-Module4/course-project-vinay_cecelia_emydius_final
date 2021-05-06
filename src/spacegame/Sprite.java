@@ -17,6 +17,7 @@ public abstract class Sprite{
 
     private boolean visible,dead;
     private Image image;
+    private String path;
     private double x,y,dX;
     // private List<Laser> laserHolder;
     private CanvasWindow canvas;
@@ -81,8 +82,18 @@ public abstract class Sprite{
         return dead;
     }
 
-    public void setImage(Image image) {
-        this.image = image;
+    public void setImage(double imgX, double imgY, String imgPath) {
+        this.image = new Image(imgX, imgY, imgPath);
+        path = imgPath;
+    }
+
+    public void setImagePath(String path) {
+        this.path = path;
+        this.image.setImagePath(path);
+    }
+
+    public String getImagePath() {
+        return path;
     }
     
     public Image getImage() {

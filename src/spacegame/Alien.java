@@ -20,8 +20,10 @@ public class Alien extends Sprite {
     
     private static GraphicsGroup alienGroup = new GraphicsGroup();
     private static List<List<Alien>> aliens = new ArrayList<>();
+    private static CanvasWindow alienCanvas;
     private static GameSetUp game;
     private static int numAliens;
+    private static boolean stunned = false;
     
    /**
     * Draws an alien based on the x and y parameters
@@ -30,7 +32,7 @@ public class Alien extends Sprite {
     */
     public Alien(double x, double y) {
         super(x, y);
-        setImage(new Image(x, y, "sprites/armedalien.png"));
+        setImage(x, y, "sprites/armedalien.png");
         setDirectionFaced("down");
     }
 
@@ -39,6 +41,7 @@ public class Alien extends Sprite {
      */
     public static void createAlienArmy(CanvasWindow canvas, GameSetUp gameSetUp){
         game = gameSetUp;
+        alienCanvas = canvas;
         double margin = canvas.getWidth() * 0.03;
         double spacing = canvas.getWidth() * 0.01;
         double x = margin;
@@ -49,6 +52,8 @@ public class Alien extends Sprite {
             aliens.add(new ArrayList<>());
             for (int j = 0; j < 3; j++) {
                 Alien alien = new Alien(x, y);
+                if (j == 0)
+                    alien.setImage(x, y, "sprites/redalien.png");
                 length = length + alien.getImage().getImageWidth() + spacing;
                 y = y + spacing + alien.getImage().getImageHeight();
                 alien.addToCanvas(canvas);
@@ -56,6 +61,56 @@ public class Alien extends Sprite {
                 numAliens++;
             }
             x = x + aliens.get(0).get(0).getImage().getWidth() + canvas.getWidth() * 0.015;
+        }
+    }
+
+    public static void stunAliens() {
+        stunned = !stunned;
+        // for (List<Alien> list : aliens) {
+        //     for (Alien alien : list) {
+        //         alienCanvas.remove(alien.getImage());
+        //         if (stunned == true) {
+        //             if (alien.getImagePath() == "sprites/redalien.png") {
+        //                 alien.setImage(alien.getX(), alien.getY(), "sprites/stunnedredalien.png");
+        //                 alienCanvas.add(alien.getImage());
+        //             }
+        //             else {
+        //                 alien.setImage(alien.getX(), alien.getY(), "sprites/stunnedalien.png");
+        //                 alienCanvas.add(alien.getImage());
+        //             }
+        //         }
+        //         else {
+        //             if (alien.getImagePath() == "sprites/stunnedredalien.png") {
+        //                 alien.setImage(alien.getX(), alien.getY(), "sprites/redalien.png");
+        //                 alienCanvas.add(alien.getImage());
+        //             }
+        //             else {
+        //                 alien.setImage(alien.getX(), alien.getY(), "sprites/armedalien.png");
+        //                 alienCanvas.add(alien.getImage());
+        //             }
+        //         }
+        //     }
+        // }
+
+        for (List<Alien> list : aliens) {
+            for (Alien alien : list) {
+                if (stunned == true) {
+                    if (alien.getImagePath() == "sprites/redalien.png") {
+                        alien.setImagePath("sprites/stunnedredalien.png");
+                    }
+                    else {
+                        alien.setImagePath("sprites/stunnedalien.png");
+                    }
+                }
+                else {
+                    if (alien.getImagePath() == "sprites/stunnedredalien.png") {
+                        alien.setImagePath("sprites/redalien.png");
+                    }
+                    else {
+                        alien.setImagePath("sprites/armedalien.png");
+                    }
+                }
+            }
         }
     }
 
@@ -82,7 +137,11 @@ public class Alien extends Sprite {
             }
             for (int j = 0; j < aliens.get(i).size(); j++) {
                 if (aliens.get(i).get(j).getCanvas() == null) {
-                    aliens.get(i).remove(j);
+                    if (aliens.get(i).get(j).getImagePath() == "sprites/redalien.png")
+                        stunAliens();
+                    if (aliens.get(i).get(j).getImagePath() == "sprites/stunnedalien.png")
+                        stunAliens();
+                    aliens.get(i).remove(j);    
                     j--;
                 }
                 else newAlienCount++;

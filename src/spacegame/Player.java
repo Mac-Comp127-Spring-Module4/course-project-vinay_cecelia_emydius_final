@@ -18,7 +18,7 @@ public class Player extends Sprite {
 
     public Player(double x, double y) {
         super(x, y);
-        setImage(new Image(x, y, "sprites/spaceship.png"));
+        setImage(x, y, "sprites/spaceship.png");
         setDirectionFaced("up");
         System.out.println(getImage().getPosition());
         lives=3;

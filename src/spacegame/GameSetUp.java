@@ -56,6 +56,7 @@ public class GameSetUp {
         // Alien alien = new Alien(300, 100);
         // alien.addToCanvas(canvas);
         Alien.createAlienArmy(canvas, this);
+        System.out.println("numAliens = " + Alien.getNumAliens());
     //    alien.removeAlien(laser, canvas);
         canvas.draw();
         canvas.pause(3000);
