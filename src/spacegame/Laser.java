@@ -18,6 +18,7 @@ public class Laser extends Line{
     private static final Color LINE_COLOR= new Color(200,150,100);
     private static List<Laser> laserList = new ArrayList<>();
     private ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
+    private Sprite ownerSprite;
     
     /**
      * Constructor that makes a super reference to the Line class
@@ -101,10 +102,13 @@ public class Laser extends Line{
     public boolean collisionChecker() {
         GraphicsObject potentialObject = getCanvas().getElementAt(getPosition().subtract(Point.UNIT_Y));
         if (potentialObject != null && potentialObject.getY() > getCanvas().getWidth() * 0.14) {
-            getCanvas().remove(potentialObject);
-            getCanvas().remove(this);
-            laserList.remove(this);
-            return true;
+            // if (ownerSprite.getGameType() == "alien" && potentialObject.getY() > 570 || ownerSprite.getGameType() == "player") {
+                getCanvas().remove(potentialObject);
+                getCanvas().remove(this);
+                laserList.remove(this);
+                return true;
+            // }
+            // else return false;
         }
         else return false;
     }

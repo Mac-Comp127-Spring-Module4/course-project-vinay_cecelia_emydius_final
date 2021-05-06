@@ -26,6 +26,7 @@ public class GameSetUp {
     private Alien alien;
     private Player player;
     private List<Image> lifeMeter;
+    private boolean gameRunning;
     private ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
    
     /**
@@ -50,32 +51,35 @@ public class GameSetUp {
         // alienShootingHandler();
         canvas.onMouseMove(event -> player.updatePosition(event.getPosition().getX(), canvas));
         canvas.animate(() -> {
-            if (player.getImage().getCanvas() == null) {
-                player.setLives(player.getLives() - 1);
-                Laser.clearLasers();
-                executor.shutdownNow();
-                canvas.pause(3000);
-                canvas.add(player.getImage());
-                executor = Executors.newSingleThreadScheduledExecutor();
-                alienShootingHandler();
-            }
-            if (lifeMeter.size() != player.getLives()) {
-                for (int i = 0; i < lifeMeter.size(); i++) {
-                    canvas.remove(lifeMeter.get(i));
+            if (gameRunning) {
+                if (player.getImage().getCanvas() == null) {
+                    player.setLives(player.getLives() - 1);
+                    Laser.clearLasers();
+                    executor.shutdownNow();
+                    canvas.pause(3000);
+                    canvas.add(player.getImage());
+                    executor = Executors.newSingleThreadScheduledExecutor();
+                    alienShootingHandler();
                 }
-                lifeMeter.clear();
-                for (int i = 0; i < player.getLives(); i++) {
-                    lifeMeter.add(new Image(800 + 35*i, 20, "sprites/heart.png"));
-                    canvas.add(lifeMeter.get(i));
+                if (lifeMeter.size() != player.getLives()) {
+                    for (int i = 0; i < lifeMeter.size(); i++) {
+                        canvas.remove(lifeMeter.get(i));
+                    }
+                    lifeMeter.clear();
+                    for (int i = 0; i < player.getLives(); i++) {
+                        lifeMeter.add(new Image(800 + 35*i, 20, "sprites/heart.png"));
+                        canvas.add(lifeMeter.get(i));
+                    }
                 }
+                gameWinGameLoss();
             }
-            gameWinGameLoss();
         });
     }
 
     public void resetEnvironment() {
         // player = new Player(550-30, 600);
         // player.addToCanvas(canvas);
+        gameRunning = true;
         canvas.add(player.getImage());
         player.setLives(3);
         for (int i = 0; i < player.getLives(); i++) {
@@ -116,6 +120,7 @@ public class GameSetUp {
      * Print method for end game and then asks if the player wants to start the game over again
      */
     public void endGame(){
+        gameRunning = false;
         Alien.removeAlienArmy(canvas);
         canvas.removeAll();
         GraphicsText loss = new GraphicsText("Game Over", CANVAS_WIDTH / 2 - 100, CANVAS_HEIGHT / 2);

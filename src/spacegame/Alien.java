@@ -24,6 +24,9 @@ public class Alien extends Sprite {
     private static GameSetUp game;
     private static int numAliens;
     private static boolean stunned = false;
+    private static ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
+    private static char moveDirection = 'r';
+
     
    /**
     * Draws an alien based on the x and y parameters
@@ -34,6 +37,7 @@ public class Alien extends Sprite {
         super(x, y);
         setImage(x, y, "sprites/armedalien.png");
         setDirectionFaced("down");
+        setGameType("alien");
     }
 
     /**
@@ -62,6 +66,7 @@ public class Alien extends Sprite {
             }
             x = x + aliens.get(0).get(0).getImage().getWidth() + canvas.getWidth() * 0.015;
         }
+        staticAnimationHandler();
     }
 
     public static void stunAliens() {
@@ -171,7 +176,59 @@ public class Alien extends Sprite {
      */
     @Override
     public void animationHandler() {
-        
+        // Runnable task = () -> {
+        //     if (moveDirection == 'r') {
+        //         getImage().moveBy(10, 2);
+        //         System.out.println("runs 1");
+        //         Alien referenceAlien = aliens.get(aliens.size()).get(0);
+        //         System.out.println("runs 2");
+        //         if (referenceAlien.getImage().getX() + referenceAlien.getImage().getWidth() > 1100) {
+        //             moveDirection = 'l';
+        //         }
+        //         System.out.println("runs 3");
+        //     }
+        //     if (moveDirection == 'l') {
+        //         getImage().moveBy(-10, 2);
+        //         Alien referenceAlien = aliens.get(0).get(0);
+        //         if (referenceAlien.getImage().getX() < 0) {
+        //             moveDirection = 'r';
+        //         }
+        //     }
+            
+        // };
+        // executor.scheduleAtFixedRate(task, 3, 4, TimeUnit.SECONDS);
+    }
+
+    public static void staticAnimationHandler() {
+        Runnable task = () -> {
+            if (moveDirection == 'r') {
+                for (int i = 0; i < aliens.size(); i++) {
+                    for (int j = 0; j < aliens.get(i).size(); j++) {
+                        aliens.get(i).get(j).getImage().moveBy(10, 2);
+                    }
+                }
+                System.out.println("runs 1");
+                Alien referenceAlien = aliens.get(aliens.size()-1).get(0);
+                System.out.println("runs 2");
+                if (referenceAlien.getImage().getX() + referenceAlien.getImage().getWidth() > 1100) {
+                    moveDirection = 'l';
+                }
+                System.out.println("runs 3");
+            }
+            if (moveDirection == 'l') {
+                for (int i = 0; i < aliens.size(); i++) {
+                    for (int j = 0; j < aliens.get(i).size(); j++) {
+                        aliens.get(i).get(j).getImage().moveBy(-10, 2);
+                    }
+                }
+                Alien referenceAlien = aliens.get(0).get(0);
+                if (referenceAlien.getImage().getX() < 0) {
+                    moveDirection = 'r';
+                }
+            }
+            
+        };
+        executor.scheduleAtFixedRate(task, 3500, 3000, TimeUnit.MILLISECONDS);
     }
 
     /**

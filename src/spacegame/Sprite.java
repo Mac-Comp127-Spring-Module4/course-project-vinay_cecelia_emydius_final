@@ -22,6 +22,7 @@ public abstract class Sprite{
     // private List<Laser> laserHolder;
     private CanvasWindow canvas;
     private int directionFaced;
+    private String gameType;
 
     /**
      * Creates the Sprite
@@ -66,6 +67,12 @@ public abstract class Sprite{
         this.y = y;
     }
 
+    public void moveBy(double x, double y) {
+        image.moveBy(x, y);
+        this.x = image.getX();
+        this.y = image.getY();
+    }
+
     public double getY() {
         return y;
     }
@@ -104,6 +111,14 @@ public abstract class Sprite{
         return getImage().getCanvas();
     }
 
+    public void setGameType(String type) {
+        this.gameType = type;
+    }
+
+    public String getGameType() {
+        return gameType;
+    }
+
     /**
      * Sets the direction that the Sprite image should face
      * @param dir
@@ -133,7 +148,7 @@ public abstract class Sprite{
      */
     public void shootLaser() {
         // Laser newLaser = new Laser(image.getX()+image.getImageWidth()/2, y, 10 * directionFaced);
-        Laser newLaser = new Laser(getCenterX(), getCenterY()+image.getHeight()/2*directionFaced, 10 * directionFaced); 
+        Laser newLaser = new Laser(image.getX()+image.getWidth()/2, image.getY()+image.getHeight()/2+image.getHeight()/2*directionFaced*1.2, 10 * directionFaced); 
         canvas.add(newLaser);
         newLaser.updatePosition();
     }

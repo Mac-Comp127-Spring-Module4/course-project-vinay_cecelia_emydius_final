@@ -20,6 +20,7 @@ public class Player extends Sprite {
         super(x, y);
         setImage(x, y, "sprites/spaceship.png");
         setDirectionFaced("up");
+        setGameType("player");
         System.out.println(getImage().getPosition());
         lives=3;
     }
