@@ -44,11 +44,6 @@ public class Player extends Sprite {
      * @param canvas
      */
     public void updatePosition(double input, CanvasWindow canvas) {
-        // if (this.getImage().getCanvas() == null) {
-        //     lives--;
-        //     canvas.pause(3000);
-        //     canvas.add(this.getImage());
-        // }
         this.getImage().setPosition(input - (this.getImage().getImageWidth()/2), this.getY());
         setX(getImage().getX());
         setY(getImage().getY());
@@ -74,9 +69,4 @@ public class Player extends Sprite {
             }
         });
     }
-
-     /**
-     * Checks to see if an alien laser has hit the player, and if so, the player loses a life
-     */
-    
 }

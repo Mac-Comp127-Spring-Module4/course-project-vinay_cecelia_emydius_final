@@ -69,34 +69,11 @@ public class Alien extends Sprite {
         staticAnimationHandler();
     }
 
+    /**
+     * Method that changes the appearance of the aliens if they are hit with a laser. 
+     */
     public static void stunAliens() {
         stunned = !stunned;
-        // for (List<Alien> list : aliens) {
-        //     for (Alien alien : list) {
-        //         alienCanvas.remove(alien.getImage());
-        //         if (stunned == true) {
-        //             if (alien.getImagePath() == "sprites/redalien.png") {
-        //                 alien.setImage(alien.getX(), alien.getY(), "sprites/stunnedredalien.png");
-        //                 alienCanvas.add(alien.getImage());
-        //             }
-        //             else {
-        //                 alien.setImage(alien.getX(), alien.getY(), "sprites/stunnedalien.png");
-        //                 alienCanvas.add(alien.getImage());
-        //             }
-        //         }
-        //         else {
-        //             if (alien.getImagePath() == "sprites/stunnedredalien.png") {
-        //                 alien.setImage(alien.getX(), alien.getY(), "sprites/redalien.png");
-        //                 alienCanvas.add(alien.getImage());
-        //             }
-        //             else {
-        //                 alien.setImage(alien.getX(), alien.getY(), "sprites/armedalien.png");
-        //                 alienCanvas.add(alien.getImage());
-        //             }
-        //         }
-        //     }
-        // }
-
         for (List<Alien> list : aliens) {
             for (Alien alien : list) {
                 if (stunned == true) {
@@ -157,7 +134,7 @@ public class Alien extends Sprite {
     }
 
     /**
-     * Method that
+     * Method that returs the aliens
      */
     public static List<List<Alien>> getAlienArmyList() {
         return aliens;
@@ -175,30 +152,13 @@ public class Alien extends Sprite {
      * Will make alien move depending on position.
      */
     @Override
-    public void animationHandler() {
-        // Runnable task = () -> {
-        //     if (moveDirection == 'r') {
-        //         getImage().moveBy(10, 2);
-        //         System.out.println("runs 1");
-        //         Alien referenceAlien = aliens.get(aliens.size()).get(0);
-        //         System.out.println("runs 2");
-        //         if (referenceAlien.getImage().getX() + referenceAlien.getImage().getWidth() > 1100) {
-        //             moveDirection = 'l';
-        //         }
-        //         System.out.println("runs 3");
-        //     }
-        //     if (moveDirection == 'l') {
-        //         getImage().moveBy(-10, 2);
-        //         Alien referenceAlien = aliens.get(0).get(0);
-        //         if (referenceAlien.getImage().getX() < 0) {
-        //             moveDirection = 'r';
-        //         }
-        //     }
-            
-        // };
-        // executor.scheduleAtFixedRate(task, 3, 4, TimeUnit.SECONDS);
+    public void animationHandler(){
     }
 
+     /**
+     * Not implemented yet.
+     * Will make alien move depending on position.
+     */
     public static void staticAnimationHandler() {
         Runnable task = () -> {
             if (moveDirection == 'r') {

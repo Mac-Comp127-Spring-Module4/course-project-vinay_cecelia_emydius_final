@@ -1,12 +1,7 @@
 package spacegame;
 
-import java.rmi.UnexpectedException;
-import java.util.ArrayList;
-import java.util.List;
-
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.Image;
-import edu.macalester.graphics.Line;
 
 /**
  * This class creates the various images we used for our space class game,
@@ -19,7 +14,6 @@ public abstract class Sprite{
     private Image image;
     private String path;
     private double x,y,dX;
-    // private List<Laser> laserHolder;
     private CanvasWindow canvas;
     private int directionFaced;
     private String gameType;
@@ -35,18 +29,26 @@ public abstract class Sprite{
         canvas = null;
         visible = true;
         directionFaced = 0;
-        // laserHolder = new ArrayList<>();
         Image image = null;
     }
 
+    /**
+     * Method that dictates if the Sprite has "died" and if it is visible, then it hasn't
+     */    
     public void hasDied(){
         visible = false;
     }
 
+    /**
+     * Method that dictates if the Sprite is alive and if so, makes it visible
+     */  
     public boolean isAlive(){
         return visible;
     }
 
+    /**
+     * Method makes the Sprite visible and can be refered to in other methods
+     */ 
     public void setVisible(boolean visible) {
         this.visible = visible;
     }
@@ -81,10 +83,16 @@ public abstract class Sprite{
         return y + getImage().getHeight()/2;
     }
 
+    /**
+     * Sprite dead method that is a boolean and can be refered to in other methods
+     */ 
     public void setDead(boolean dead) {
         this.dead = dead;
     }
 
+    /**
+     * Method that dictates if the Sprite is newly dead
+     */ 
     public boolean isDead(){
         return dead;
     }
@@ -147,12 +155,13 @@ public abstract class Sprite{
      * laser is moving
      */
     public void shootLaser() {
-        // Laser newLaser = new Laser(image.getX()+image.getImageWidth()/2, y, 10 * directionFaced);
         Laser newLaser = new Laser(image.getX()+image.getWidth()/2, image.getY()+image.getHeight()/2+image.getHeight()/2*directionFaced*1.2, 10 * directionFaced); 
         canvas.add(newLaser);
         newLaser.updatePosition();
     }
 
-   // public abstract void updatePosition();
+    /**
+     * Method that calls the animation handler
+     */ 
     public abstract void animationHandler();
 }

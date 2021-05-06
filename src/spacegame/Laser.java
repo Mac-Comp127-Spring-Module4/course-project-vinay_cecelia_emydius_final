@@ -18,7 +18,6 @@ public class Laser extends Line{
     private static final Color LINE_COLOR= new Color(200,150,100);
     private static List<Laser> laserList = new ArrayList<>();
     private ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
-    private Sprite ownerSprite;
     
     /**
      * Constructor that makes a super reference to the Line class
@@ -56,24 +55,6 @@ public class Laser extends Line{
      * moves over the canvas. 
      */
     public void updatePosition() {
-        // try {
-        //     getCanvas().animate(() -> {
-        //         if (getCanvas() != null) {
-        //             this.moveBy(0, dYVelocity);
-        //             getCanvas().draw();
-        //             if (collisionChecker()) {
-        //                 Alien.updateAlienList();
-        //             }
-        //             else if (getY() <= 0 || getY() >= getCanvas().getHeight()) {
-        //                 getCanvas().remove(this);
-        //                 System.out.println("Removed!");
-        //             }
-        //         }
-        //     });
-        // } catch (Exception e) {
-        //     //TODO: handle exception
-        //     System.out.println("ConcurrentModificationException?");
-
             Runnable task = () -> {
                 if (getCanvas() != null) {
                     this.moveBy(0, dYVelocity);
@@ -88,19 +69,6 @@ public class Laser extends Line{
                 }
             };
             executor.scheduleAtFixedRate(task, 0, 16, TimeUnit.MILLISECONDS);
-        
-        // getCanvas().animate(() -> {
-        //     if (getCanvas() != null) {
-        //         this.moveBy(0, dYVelocity);
-        //         getCanvas().draw();
-        //         if (collisionChecker()) {
-        //         }
-        //         else if (getY() <= 0 || getY() >= getCanvas().getHeight()) {
-        //             getCanvas().remove(this);
-        //             System.out.println("Removed!");
-        //         }
-        //     }
-        // });
     }
 
     /**
@@ -110,16 +78,11 @@ public class Laser extends Line{
     public boolean collisionChecker() {
         GraphicsObject potentialObject = getCanvas().getElementAt(getPosition().subtract(Point.UNIT_Y));
         if (potentialObject != null && potentialObject.getY() > getCanvas().getWidth() * 0.14) {
-            // if (ownerSprite.getGameType() == "alien" && potentialObject.getY() > 570 || ownerSprite.getGameType() == "player") {
                 getCanvas().remove(potentialObject);
                 getCanvas().remove(this);
                 laserList.remove(this);
                 return true;
-            // }
-            // else return false;
         }
         else return false;
-    }
-
-    
+    } 
 }
