@@ -24,6 +24,10 @@ public class Player extends Sprite {
         lives=3;
     }
     
+    public void setLives(int lives) {
+        this.lives = lives;
+    }
+
     /**
      * returns the number of lives 
      * @return
@@ -39,11 +43,11 @@ public class Player extends Sprite {
      * @param canvas
      */
     public void updatePosition(double input, CanvasWindow canvas) {
-        if (this.getImage().getCanvas() == null) {
-            lives--;
-            canvas.pause(3000);
-            canvas.add(this.getImage());
-        }
+        // if (this.getImage().getCanvas() == null) {
+        //     lives--;
+        //     canvas.pause(3000);
+        //     canvas.add(this.getImage());
+        // }
         this.getImage().setPosition(input - (this.getImage().getImageWidth()/2), this.getY());
         setX(getImage().getX());
         setY(getImage().getY());

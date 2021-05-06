@@ -1,5 +1,6 @@
 package spacegame;
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.Executors;
@@ -23,6 +24,7 @@ public class GameSetUp {
     private CanvasWindow canvas;
     private Alien alien;
     private Player player;
+    private List<Image> lifeMeter;
     private ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
    
     /**
@@ -32,6 +34,9 @@ public class GameSetUp {
     public GameSetUp(){
         canvas = new CanvasWindow("Space Shooter!", CANVAS_WIDTH, CANVAS_HEIGHT);
         canvas.setBackground(Color.BLACK);
+        player = new Player(550-30, 600);
+        player.addToCanvas(canvas);
+        lifeMeter = new ArrayList<>();
         resetEnvironment();
     //     player = new Player(550-30, 600);
     //     player.addToCanvas(canvas);
@@ -41,18 +46,41 @@ public class GameSetUp {
     //     // alien.addToCanvas(canvas);
     //     Alien.createAlienArmy(canvas, this);
     // //    alien.removeAlien(laser, canvas);
-    //     alienShootingHandler();
-    //     canvas.onMouseMove(event -> player.updatePosition(event.getPosition().getX(), canvas));
-    //     canvas.animate(() -> {
-    //         gameWinGameLoss();
-    //     });
+        // alienShootingHandler();
+        canvas.onMouseMove(event -> player.updatePosition(event.getPosition().getX(), canvas));
+        canvas.animate(() -> {
+            if (player.getImage().getCanvas() == null) {
+                player.setLives(player.getLives() - 1);
+                Laser.clearLasers();
+                executor.shutdownNow();
+                canvas.pause(3000);
+                canvas.add(player.getImage());
+                executor = Executors.newSingleThreadScheduledExecutor();
+                alienShootingHandler();
+            }
+            if (lifeMeter.size() != player.getLives()) {
+                for (int i = 0; i < lifeMeter.size(); i++) {
+                    canvas.remove(lifeMeter.get(i));
+                }
+                lifeMeter.clear();
+                for (int i = 0; i < player.getLives(); i++) {
+                    lifeMeter.add(new Image(800 + 35*i, 20, "sprites/heart.png"));
+                    canvas.add(lifeMeter.get(i));
+                }
+            }
+            gameWinGameLoss();
+        });
     }
 
     public void resetEnvironment() {
-        player = new Player(550-30, 600);
-        player.addToCanvas(canvas);
-
-
+        // player = new Player(550-30, 600);
+        // player.addToCanvas(canvas);
+        canvas.add(player.getImage());
+        player.setLives(3);
+        for (int i = 0; i < player.getLives(); i++) {
+            lifeMeter.add(new Image(800 + 35*i, 20, "sprites/heart.png"));
+            canvas.add(lifeMeter.get(i));
+        }
         // Alien alien = new Alien(300, 100);
         // alien.addToCanvas(canvas);
         Alien.createAlienArmy(canvas, this);
@@ -60,11 +88,12 @@ public class GameSetUp {
     //    alien.removeAlien(laser, canvas);
         canvas.draw();
         canvas.pause(3000);
+        executor = Executors.newSingleThreadScheduledExecutor();
         alienShootingHandler();
-        canvas.onMouseMove(event -> player.updatePosition(event.getPosition().getX(), canvas));
-        canvas.animate(() -> {
-            gameWinGameLoss();
-        });
+        // canvas.onMouseMove(event -> player.updatePosition(event.getPosition().getX(), canvas));
+        // canvas.animate(() -> {
+        //     gameWinGameLoss();
+        // });
     }
 
     /**
@@ -102,6 +131,8 @@ public class GameSetUp {
         String reset = sc.nextLine();
         System.out.println(reset);
         if (reset.toLowerCase().equals("y")){
+            canvas.remove(loss);
+            canvas.remove(restart);
             resetEnvironment();
         }
         else{
@@ -170,7 +201,7 @@ public class GameSetUp {
             System.out.println("The executor scheduler is working.");
             // System.out.println(Alien.getAlienArmyList());
         };
-        executor.scheduleAtFixedRate(task, 0, 3, TimeUnit.SECONDS);
+        executor.scheduleAtFixedRate(task, 3, 3, TimeUnit.SECONDS);
     }
    
 

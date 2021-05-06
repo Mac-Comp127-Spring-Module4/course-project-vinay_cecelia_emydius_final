@@ -7,6 +7,8 @@ import java.awt.*;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
+import java.util.List;
+import java.util.ArrayList;
 
 /**
  * 
@@ -14,6 +16,7 @@ import java.util.concurrent.TimeUnit;
 public class Laser extends Line{
     private double dYVelocity;
     private static final Color LINE_COLOR= new Color(200,150,100);
+    private static List<Laser> laserList = new ArrayList<>();
     private ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
     
     /**
@@ -32,6 +35,16 @@ public class Laser extends Line{
         this.dYVelocity= dYVelocity;
         this.setStrokeColor(LINE_COLOR);
         this.setStrokeWidth(5);
+        laserList.add(this);
+    }
+
+    public static void clearLasers() {
+        for (int i = 0; i < laserList.size(); i++) {
+            if (laserList.get(i).getCanvas() != null)
+                laserList.get(i).getCanvas().remove(laserList.get(i));
+            laserList.remove(i);
+            i--;
+        }
     }
 
     /**
@@ -87,9 +100,10 @@ public class Laser extends Line{
 
     public boolean collisionChecker() {
         GraphicsObject potentialObject = getCanvas().getElementAt(getPosition().subtract(Point.UNIT_Y));
-        if (potentialObject != null) {
+        if (potentialObject != null && potentialObject.getY() > getCanvas().getWidth() * 0.14) {
             getCanvas().remove(potentialObject);
             getCanvas().remove(this);
+            laserList.remove(this);
             return true;
         }
         else return false;
