@@ -14,7 +14,8 @@ import edu.macalester.graphics.ui.Button;
 /**
 * This class sets up the game, using methods to add graphic objects to canvas,
 * a method to dictate the conditions when the player wins or loses, and an handler method
-* so the aliens shoot in a coordinated fashion. There is also a main method at the end. 
+* so the aliens shoot in a coordinated fashion. There is also a main method at the end that runs
+* the game. 
 */
 public class GameSetUp {
     Scanner sc = new Scanner(System.in);
